@@ -1,0 +1,6 @@
+# query pattern - request
+# attributes of request ontology_management_msgs::msg::ExecuteCommandsRequest
+string commands
+---
+# attributes of response ontology_management_msgs::msg::ExecuteCommandsResponse
+string output

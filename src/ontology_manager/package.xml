@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="3">
+	<name>ontology_manager</name>
+	<version>0.1.0</version>
+	<description>An ontology manager node. It that encapsulates 3 logical blocks that realize the semantic anchoring stack. A knowledge base constituted by an ontology and its rules. A populator block that realizes the setup phase and adds individuals (ABoxes) to the knowledge base when this is out of the perception-component scope. A reasoner that discovers and makes explicit all implied information by terminology (TBox) and assertion (ABox) statements (and ensures the consistency of the ontology). All ontology manipulations rely on the Owlready2.</description>
+  <author email="leonjubin@gmail.com">Léon JUBIN-HUERNE</author>
+  <author email="raphael.lallement@cea.fr">Raphaël LALLEMENT</author>
+  <author email="matteo.morelli@cea.fr">Matteo MORELLI</author>
+  <maintainer email="raphael.lallement@cea.fr">Raphaël LALLEMENT</maintainer>
+  <maintainer email="matteo.morelli@cea.fr">Matteo MORELLI</maintainer>
+	<license>CeCILL-B</license>
+
+	<buildtool_depend>ament_cmake</buildtool_depend>
+
+	<exec_depend>rclpy</exec_depend>
+	<exec_depend>ontology_management_msgs</exec_depend>
+
+	<export>
+		<build_type>ament_python</build_type>
+	</export>
+</package>

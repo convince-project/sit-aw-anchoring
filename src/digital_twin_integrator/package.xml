@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="3">
+	<name>digital_twin_integrator</name>
+	<version>0.1.0</version>
+	<description>A digital twin integrator node. It interacts with digital twins to get data that come from the perception pipeline, such as numerical poses of objects in the scene, the robot configuration, etc., and enrich assertion statements in an ontology (ABoxes) with those data.</description>
+  <author email="leonjubin@gmail.com">Léon JUBIN-HUERNE</author>
+  <author email="raphael.lallement@cea.fr">Raphaël LALLEMENT</author>
+  <author email="matteo.morelli@cea.fr">Matteo MORELLI</author>
+  <maintainer email="raphael.lallement@cea.fr">Raphaël LALLEMENT</maintainer>
+  <maintainer email="matteo.morelli@cea.fr">Matteo MORELLI</maintainer>
+	<license>CeCILL-B</license>
+
+	<buildtool_depend>ament_cmake</buildtool_depend>
+
+	<exec_depend>rclpy</exec_depend>
+	<exec_depend>ontology_management_msgs</exec_depend>
+	<exec_depend>digital_twin_integrator_msgs</exec_depend>
+
+	<export>
+		<build_type>ament_python</build_type>
+	</export>
+</package>

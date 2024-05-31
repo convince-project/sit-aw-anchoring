@@ -1,0 +1,10 @@
+# action pattern
+# attributes of goal ontology_management_msgs::msg::GetOntologyGoal
+string knowledge_domain
+---
+# attributes of result ontology_management_msgs::msg::GetOntologyResponse
+string ontology
+process_msgs/Result result
+---
+# attributes of feedback ontology_management_msgs::msg::GetOntologyFeedback
+process_msgs/Progress progress

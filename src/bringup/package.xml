@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="3">
+	<name>bringup</name>
+	<version>0.1.0</version>
+	<description>Bringup scripts and configurations for the semantic anchoring stack.</description>
+  <author email="leonjubin@gmail.com">Léon JUBIN-HUERNE</author>
+  <author email="raphael.lallement@cea.fr">Raphaël LALLEMENT</author>
+  <author email="matteo.morelli@cea.fr">Matteo MORELLI</author>
+  <maintainer email="raphael.lallement@cea.fr">Raphaël LALLEMENT</maintainer>
+  <maintainer email="matteo.morelli@cea.fr">Matteo MORELLI</maintainer>
+	<license>CeCILL-B</license>
+
+	<buildtool_depend>ament_cmake</buildtool_depend>
+
+	<depend>rclcpp</depend>
+	<depend>rclcpp_lifecycle</depend>
+
+  <exec_depend>ontology_manager</exec_depend>
+
+	<export>
+		<build_type>ament_cmake</build_type>
+	</export>
+</package>

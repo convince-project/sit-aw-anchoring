@@ -1,0 +1,99 @@
+{
+    "version": "0.2",
+    "data" :
+        [   
+            {
+                "id": "Blue",
+                "name": "blue",
+                "setup_properties": 
+                {
+                    "class": "Color"
+                }
+            },
+
+            {
+                "id": "CubeBlue1",
+                "name": "blue cube 1",
+                "setup_properties": 
+                {
+                    "class": "Cube",
+                    "color": "Blue"
+                },
+                "DT_config" :
+                [
+                    {
+                        "DigitalTwin" : "XDE",
+                        "id_DT": "59c"
+                    }
+                ]
+            },
+
+            {
+                "id": "CubeBlue2",
+                "name": "blue cube 2",
+                "setup_properties": 
+                {
+                    "class": "Cube",
+                    "color": "Blue"
+                },
+                "DT_config" :
+                [
+                    {
+                        "DigitalTwin" : "XDE",
+                        "id_DT": "78d"
+                    }
+                ]
+            },
+
+            {
+                "id": "UR_10_1",
+                "name": "Universal Robot UR_10",
+                "setup_properties": 
+                {
+                    "class": "UniversalRobot",
+                    "range": "2"
+                },
+                "DT_config" :
+                [
+                    {
+                        "DigitalTwin" : "XDE",
+                        "id_DT": "j8p"
+                    }
+                ]
+            },
+
+            {
+                "id": "Table1",
+                "name": "table 1",
+                "setup_properties": 
+                {
+                    "class": "Table"
+                },
+                "DT_config" :
+                [
+                    {
+                        "DigitalTwin" : "XDE",
+                        "id_DT": "p2n"
+                    }
+                ]
+            },
+
+            {
+                "id": "Gripper1",
+                "name": "gripper 1",
+                "setup_properties": 
+                {
+                    "class": "Gripper",
+                    "isComponentOf": "UR_10_1"
+                },
+                "DT_config" :
+                [
+                    {
+                        "DigitalTwin" : "XDE",
+                        "id_DT": "o9n"
+                    }
+                ]
+            }
+        ]
+}
+

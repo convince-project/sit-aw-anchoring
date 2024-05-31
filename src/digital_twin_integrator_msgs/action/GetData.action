@@ -1,0 +1,10 @@
+# action pattern
+# attributes of goal digital_twin_integrator_msgs::msg::GetDataGoal
+string[] entities
+---
+# attributes of result digital_twin_integrator_msgs::msg::GetDataResponse
+process_msgs/Result result
+digital_twin_integrator_msgs/EntityData[] entities_data
+---
+# attributes of feedback digital_twin_integrator_msgs::msg::GetDataFeedback
+process_msgs/Progress progress

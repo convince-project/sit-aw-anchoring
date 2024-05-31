@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:robotics.components="http://www.eclipse.org/papyrus/robotics/components/1" xmlns:robotics.functions="http://www.eclipse.org/papyrus/robotics/functions/1" xmlns:robotics.generics="http://www.eclipse.org/papyrus/robotics/generics/1" xmlns:robotics.parameters="http://www.eclipse.org/papyrus/robotics/parameters/1" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/papyrus/robotics/components/1 http://www.eclipse.org/papyrus/robotics/1#//components http://www.eclipse.org/papyrus/robotics/functions/1 http://www.eclipse.org/papyrus/robotics/1#//functions http://www.eclipse.org/papyrus/robotics/generics/1 http://www.eclipse.org/papyrus/robotics/1#//generics http://www.eclipse.org/papyrus/robotics/parameters/1 http://www.eclipse.org/papyrus/robotics/1#//parameters">
+  <uml:Model xmi:id="_fHtSALSJEe6H5dxir4S0zg" name="ontology_manager_component_definition">
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_fHtSAbSJEe6H5dxir4S0zg">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_fHtSArSJEe6H5dxir4S0zg">
+      <importedPackage xmi:type="uml:Model" href="pathmap://PapyrusC_Cpp_LIBRARIES/AnsiCLibrary.uml#_DV8nkBv8EduZN5aJJITI5w"/>
+    </packageImport>
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_MJrFQLSKEe6H5dxir4S0zg">
+      <importedPackage xmi:type="uml:Model" href="../../../anchoring_domain/models/services/ontology_management.servicedef.uml#_p7JGwLSGEe6H5dxir4S0zg"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_fHtSA7SJEe6H5dxir4S0zg" name="ontology_manager">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_KbRCsLSKEe6H5dxir4S0zg" name="validate_set_ontology" type="_MJvWsLSKEe6H5dxir4S0zg" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_UnxS8LSKEe6H5dxir4S0zg" name="activity01" type="_UngNMLSKEe6H5dxir4S0zg"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_sgxaMLYQEe6LKfugxTK8pA" name="get_ontology" type="_uLtSALYQEe6LKfugxTK8pA" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_cGFUsLalEe6LKfugxTK8pA" name="execute_owlready2_commands" type="_fOCkILalEe6LKfugxTK8pA" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_paOEQLalEe6LKfugxTK8pA" name="activity02" type="_pZ-zsLalEe6LKfugxTK8pA"/>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_awpVsLSKEe6H5dxir4S0zg" name="Connects6">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_awsZALSKEe6H5dxir4S0zg" role="_KbRCsLSKEe6H5dxir4S0zg"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_awtAELSKEe6H5dxir4S0zg" partWithPort="_UnxS8LSKEe6H5dxir4S0zg" role="_YnOLELSKEe6H5dxir4S0zg"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_0Ut3oLYQEe6LKfugxTK8pA" name="Connects9">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_0UyJELYQEe6LKfugxTK8pA" role="_sgxaMLYQEe6LKfugxTK8pA"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_0UyJEbYQEe6LKfugxTK8pA" partWithPort="_UnxS8LSKEe6H5dxir4S0zg" role="_xWek4LYQEe6LKfugxTK8pA"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_tJqxgLalEe6LKfugxTK8pA" name="Connects14">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_tJt00LalEe6LKfugxTK8pA" role="_cGFUsLalEe6LKfugxTK8pA"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_tJt00balEe6LKfugxTK8pA" partWithPort="_paOEQLalEe6LKfugxTK8pA" role="_rX7uILalEe6LKfugxTK8pA"/>
+      </ownedConnector>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_fHtSBLSJEe6H5dxir4S0zg"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_MJvWsLSKEe6H5dxir4S0zg">
+        <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_MJyaALSKEe6H5dxir4S0zg" client="_MJvWsLSKEe6H5dxir4S0zg">
+          <supplier xmi:type="uml:Interface" href="../../../anchoring_domain/models/services/ontology_management.servicedef.uml#_UVjzgLSIEe6H5dxir4S0zg"/>
+          <contract xmi:type="uml:Interface" href="../../../anchoring_domain/models/services/ontology_management.servicedef.uml#_UVjzgLSIEe6H5dxir4S0zg"/>
+        </interfaceRealization>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_UngNMLSKEe6H5dxir4S0zg" name="Activity01">
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_YnOLELSKEe6H5dxir4S0zg" name="ActivityPort1" aggregation="composite"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_awwqcbSKEe6H5dxir4S0zg" name="" type="_awuOMLSKEe6H5dxir4S0zg"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_awztwLSKEe6H5dxir4S0zg" name="" type="_awxRgLSKEe6H5dxir4S0zg"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_aw2KALSKEe6H5dxir4S0zg" name="" type="_awztwbSKEe6H5dxir4S0zg"/>
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_xWek4LYQEe6LKfugxTK8pA" name="ActivityPort5" aggregation="composite"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_0VBZoLYQEe6LKfugxTK8pA" name="" type="_0U6r8LYQEe6LKfugxTK8pA"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_0VEc8bYQEe6LKfugxTK8pA" name="" type="_0VCAsLYQEe6LKfugxTK8pA"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_0VHgQbYQEe6LKfugxTK8pA" name="" type="_0VFEALYQEe6LKfugxTK8pA"/>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_uLtSALYQEe6LKfugxTK8pA">
+        <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_uL9wsLYQEe6LKfugxTK8pA" client="_uLtSALYQEe6LKfugxTK8pA">
+          <supplier xmi:type="uml:Interface" href="../../../anchoring_domain/models/services/ontology_management.servicedef.uml#_37j68LXuEe6LKfugxTK8pA"/>
+          <contract xmi:type="uml:Interface" href="../../../anchoring_domain/models/services/ontology_management.servicedef.uml#_37j68LXuEe6LKfugxTK8pA"/>
+        </interfaceRealization>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_fOCkILalEe6LKfugxTK8pA">
+        <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_fOKf8LalEe6LKfugxTK8pA" client="_fOCkILalEe6LKfugxTK8pA">
+          <supplier xmi:type="uml:Interface" href="../../../anchoring_domain/models/services/ontology_management.servicedef.uml#_QBHuALalEe6LKfugxTK8pA"/>
+          <contract xmi:type="uml:Interface" href="../../../anchoring_domain/models/services/ontology_management.servicedef.uml#_QBHuALalEe6LKfugxTK8pA"/>
+        </interfaceRealization>
+      </nestedClassifier>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_pZ-zsLalEe6LKfugxTK8pA" name="Activity02">
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_rX7uILalEe6LKfugxTK8pA" name="ActivityPort1" aggregation="composite"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_tJzUYbalEe6LKfugxTK8pA" name="" type="_tJwRELalEe6LKfugxTK8pA"/>
+      </nestedClassifier>
+    </packagedElement>
+    <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_awuOMLSKEe6H5dxir4S0zg" name="validate_set_ontology_goal">
+      <language>C++</language>
+      <body></body>
+    </packagedElement>
+    <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_awxRgLSKEe6H5dxir4S0zg" name="validate_set_ontology_cancel">
+      <language>C++</language>
+      <body></body>
+    </packagedElement>
+    <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_awztwbSKEe6H5dxir4S0zg" name="validate_set_ontology_accepted">
+      <language>C++</language>
+      <body></body>
+    </packagedElement>
+    <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_0U6r8LYQEe6LKfugxTK8pA" name="get_ontology_goal">
+      <language>C++</language>
+      <body></body>
+    </packagedElement>
+    <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_0VCAsLYQEe6LKfugxTK8pA" name="get_ontology_cancel">
+      <language>C++</language>
+      <body></body>
+    </packagedElement>
+    <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_0VFEALYQEe6LKfugxTK8pA" name="get_ontology_accepted">
+      <language>C++</language>
+      <body></body>
+    </packagedElement>
+    <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_tJwRELalEe6LKfugxTK8pA" name="execute_owlready2_commands_handler">
+      <language>C++</language>
+      <body></body>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_fHtSBbSJEe6H5dxir4S0zg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_fHtSBrSJEe6H5dxir4S0zg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/robotics/bpc/1#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://ROBOTICS_BPC_PROFILES/bpc.profile.uml#__9qqMJZ1Eeeq1f8hGgKVzA"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_fHtSB7SJEe6H5dxir4S0zg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_fHtSCLSJEe6H5dxir4S0zg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/robotics/1#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://ROBOTICS_PROFILES/robotics.profile.uml#__9qqMJZ1Eeeq1f8hGgKVzA"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_fHtSCbSJEe6H5dxir4S0zg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_fHtSCrSJEe6H5dxir4S0zg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/robotics/1#//components"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://ROBOTICS_PROFILES/robotics.profile.uml#_EZ1TgJZ2Eeeq1f8hGgKVzA"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_fHtSC7SJEe6H5dxir4S0zg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_fHtSDLSJEe6H5dxir4S0zg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/robotics/1#//commpattern"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://ROBOTICS_PROFILES/robotics.profile.uml#_8Z6x8Je6EeeiCOWsEr9OuA"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_fHtSDbSJEe6H5dxir4S0zg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_fHtSDrSJEe6H5dxir4S0zg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/robotics/1#//deployment"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://ROBOTICS_PROFILES/robotics.profile.uml#_tu6OsJe9EeeiCOWsEr9OuA"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_fHtSD7SJEe6H5dxir4S0zg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_fHtSELSJEe6H5dxir4S0zg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/robotics/1#//services"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://ROBOTICS_PROFILES/robotics.profile.uml#_SlbOAJe_EeeiCOWsEr9OuA"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_fHtSEbSJEe6H5dxir4S0zg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_fHtSErSJEe6H5dxir4S0zg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/robotics/1#//commobject"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://ROBOTICS_PROFILES/robotics.profile.uml#_bz5AcPCaEeee6ab5J_C5Dg"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_fHtSE7SJEe6H5dxir4S0zg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_fHtSFLSJEe6H5dxir4S0zg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/robotics/1#//functions"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://ROBOTICS_PROFILES/robotics.profile.uml#_SV7GwC6LEei0V9-WLHIyvg"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_fHtSFbSJEe6H5dxir4S0zg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_fHtSFrSJEe6H5dxir4S0zg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/robotics/1#//parameters"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://ROBOTICS_PROFILES/robotics.profile.uml#_-pU5oDmpEei--ZsfKWaFtw"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_fHtSF7SJEe6H5dxir4S0zg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_fHtSGLSJEe6H5dxir4S0zg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/robotics/1#//generics"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://ROBOTICS_PROFILES/robotics.profile.uml#_eFhjMEnvEeien6eLHpkAxA"/>
+    </profileApplication>
+  </uml:Model>
+  <robotics.components:ComponentDefinitionModel xmi:id="_fHtSGbSJEe6H5dxir4S0zg" base_Package="_fHtSALSJEe6H5dxir4S0zg"/>
+  <robotics.components:ComponentDefinition xmi:id="_fHtSGrSJEe6H5dxir4S0zg" base_Class="_fHtSA7SJEe6H5dxir4S0zg"/>
+  <robotics.parameters:Parameter xmi:id="_fHtSG7SJEe6H5dxir4S0zg" base_Class="_fHtSBLSJEe6H5dxir4S0zg"/>
+  <robotics.components:ComponentPort xmi:id="_MJuIkLSKEe6H5dxir4S0zg" base_Port="_KbRCsLSKEe6H5dxir4S0zg" isCoordinationPort="true"/>
+  <robotics.components:ComponentService xmi:id="_MJxL4LSKEe6H5dxir4S0zg" base_Class="_MJvWsLSKEe6H5dxir4S0zg"/>
+  <robotics.components:ActivityInstance xmi:id="_Un2LcLSKEe6H5dxir4S0zg" base_Property="_UnxS8LSKEe6H5dxir4S0zg"/>
+  <robotics.components:Activity xmi:id="_Un5OwLSKEe6H5dxir4S0zg" base_Class="_UngNMLSKEe6H5dxir4S0zg"/>
+  <robotics.components:ActivityPort xmi:id="_YnTDkLSKEe6H5dxir4S0zg" base_Port="_YnOLELSKEe6H5dxir4S0zg"/>
+  <robotics.generics:Connects xmi:id="_awtAEbSKEe6H5dxir4S0zg" base_Connector="_awpVsLSKEe6H5dxir4S0zg"/>
+  <robotics.functions:Function xmi:id="_awwqcLSKEe6H5dxir4S0zg" base_Class="_awuOMLSKEe6H5dxir4S0zg" activityPort="_YnTDkLSKEe6H5dxir4S0zg"/>
+  <robotics.functions:Function xmi:id="_awzGsLSKEe6H5dxir4S0zg" base_Class="_awxRgLSKEe6H5dxir4S0zg" activityPort="_YnTDkLSKEe6H5dxir4S0zg"/>
+  <robotics.functions:Function xmi:id="_aw1i8LSKEe6H5dxir4S0zg" base_Class="_awztwbSKEe6H5dxir4S0zg" activityPort="_YnTDkLSKEe6H5dxir4S0zg"/>
+  <robotics.components:ComponentPort xmi:id="_uLrc0LYQEe6LKfugxTK8pA" base_Port="_sgxaMLYQEe6LKfugxTK8pA" isCoordinationPort="true"/>
+  <robotics.components:ComponentService xmi:id="_uLxjcLYQEe6LKfugxTK8pA" base_Class="_uLtSALYQEe6LKfugxTK8pA"/>
+  <robotics.components:ActivityPort xmi:id="_xWhoMLYQEe6LKfugxTK8pA" base_Port="_xWek4LYQEe6LKfugxTK8pA"/>
+  <robotics.generics:Connects xmi:id="_0UywILYQEe6LKfugxTK8pA" base_Connector="_0Ut3oLYQEe6LKfugxTK8pA"/>
+  <robotics.functions:Function xmi:id="_0VAykLYQEe6LKfugxTK8pA" base_Class="_0U6r8LYQEe6LKfugxTK8pA" activityPort="_xWhoMLYQEe6LKfugxTK8pA"/>
+  <robotics.functions:Function xmi:id="_0VEc8LYQEe6LKfugxTK8pA" base_Class="_0VCAsLYQEe6LKfugxTK8pA" activityPort="_xWhoMLYQEe6LKfugxTK8pA"/>
+  <robotics.functions:Function xmi:id="_0VHgQLYQEe6LKfugxTK8pA" base_Class="_0VFEALYQEe6LKfugxTK8pA" activityPort="_xWhoMLYQEe6LKfugxTK8pA"/>
+  <robotics.components:ComponentService xmi:id="_fOIqwLalEe6LKfugxTK8pA" base_Class="_fOCkILalEe6LKfugxTK8pA"/>
+  <robotics.components:ComponentPort xmi:id="_fOLHALalEe6LKfugxTK8pA" base_Port="_cGFUsLalEe6LKfugxTK8pA"/>
+  <robotics.components:ActivityInstance xmi:id="_paRuoLalEe6LKfugxTK8pA" base_Property="_paOEQLalEe6LKfugxTK8pA"/>
+  <robotics.components:Activity xmi:id="_paUK4LalEe6LKfugxTK8pA" base_Class="_pZ-zsLalEe6LKfugxTK8pA"/>
+  <robotics.components:ActivityPort xmi:id="_rYGtQLalEe6LKfugxTK8pA" base_Port="_rX7uILalEe6LKfugxTK8pA"/>
+  <robotics.generics:Connects xmi:id="_tJub4LalEe6LKfugxTK8pA" base_Connector="_tJqxgLalEe6LKfugxTK8pA"/>
+  <robotics.functions:Function xmi:id="_tJzUYLalEe6LKfugxTK8pA" base_Class="_tJwRELalEe6LKfugxTK8pA" activityPort="_rYGtQLalEe6LKfugxTK8pA"/>
+</xmi:XMI>

@@ -1,0 +1,52 @@
+{
+    "version" : "0.3",
+    "data" : 
+        [
+            {
+            "Digital_Twin": "XDE",
+            "data": 
+                [
+                    {
+                        "name" : "pose",
+                        "ontology_name" : "hasPose",
+                        "real_time" : "True"
+                    },
+                    {
+                        "name" : "bounding_box_width",
+                        "ontology_name" : "hasWidth",
+                        "real_time" : "False"
+                    },
+                    {
+                        "name" : "bounding_box_height",
+                        "ontology_name" : "hasHeight",
+                        "real_time" : "False"
+                    },
+                    {
+                        "name" : "bounding_box_length",
+                        "ontology_name" : "hasLength",
+                        "real_time" : "False"
+                    },
+                    {
+                        "name" : "attached_to",
+                        "ontology_name" : "hasBinding",
+                        "real_time" : "True"
+                    },
+                    {
+                        "name" : "range",
+                        "ontology_name" : "hasRangeValue",
+                        "real_time" : "False"
+                    },
+                    {
+                        "name" : "mass",
+                        "ontology_name" : "hasMassValue",
+                        "real_time" : "False"
+                    },
+                    {
+                        "name" : "TestGraspability",
+                        "ontology_name" : "hasGraspabilityRequestCompute",
+                        "real_time" : "False"
+                    }
+                ]
+            }
+        ]
+}

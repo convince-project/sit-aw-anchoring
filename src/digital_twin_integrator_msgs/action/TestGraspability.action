@@ -1,0 +1,11 @@
+# action pattern
+# attributes of goal digital_twin_integrator_msgs::msg::TestGraspabilityGoal
+string object
+string robot
+---
+# attributes of result digital_twin_integrator_msgs::msg::TestGraspabilityResponse
+process_msgs/Result result
+bool graspable
+---
+# attributes of feedback digital_twin_integrator_msgs::msg::TestGraspabilityFeedback
+process_msgs/Progress progress

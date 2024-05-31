@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="3">
+	<name>ontology_management_msgs</name>
+	<version>0.1.0</version>
+	<description>Messages, service and action interfaces for the ontology manager node.</description>
+  <author email="leonjubin@gmail.com">Léon JUBIN-HUERNE</author>
+  <author email="raphael.lallement@cea.fr">Raphaël LALLEMENT</author>
+  <author email="matteo.morelli@cea.fr">Matteo MORELLI</author>
+  <maintainer email="raphael.lallement@cea.fr">Raphaël LALLEMENT</maintainer>
+  <maintainer email="matteo.morelli@cea.fr">Matteo MORELLI</maintainer>
+	<license>CeCILL-B</license>
+
+	<buildtool_depend>rosidl_default_generators</buildtool_depend>
+
+	<depend>process_msgs</depend>
+
+	<member_of_group>rosidl_interface_packages</member_of_group>
+
+	<export>
+	<build_type>ament_cmake</build_type>
+	</export>
+</package>

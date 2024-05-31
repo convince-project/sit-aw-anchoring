@@ -1,0 +1,9 @@
+# attributes of goal ontology_management_msgs::msg::PopulateInstancesGoal
+string knowledge_domain
+string instances
+---
+# attributes of result ontology_management_msgs::msg::PopulateInstancesResponse
+process_msgs/Result result
+---
+# attributes of feedback ontology_management_msgs::msg::PopulateInstancesFeedback
+process_msgs/Progress progress

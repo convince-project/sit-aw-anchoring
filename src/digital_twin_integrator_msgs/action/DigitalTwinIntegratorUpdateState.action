@@ -1,0 +1,9 @@
+# action pattern
+# attributes of goal digital_twin_integrator_msgs::msg::DigitalTwinIntegratorUpdateStateGoal
+string knowledge_domain
+---
+# attributes of result digital_twin_integrator_msgs::msg::DigitalTwinIntegratorUpdateStateResponse
+process_msgs/Result result
+---
+# attributes of feedback digital_twin_integrator_msgs::msg::DigitalTwinIntegratorUpdateStateFeedback
+process_msgs/Progress progress
