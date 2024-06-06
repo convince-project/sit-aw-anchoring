@@ -42,8 +42,6 @@ Use this command to launch the bringup script:
 
     ros2 launch bringup activate_launch.py
 
-.. _make-join-docker:
-
 Now open another terminal and "join" the docker to run commands that enable the interaction with SIT-AW-ANCHORING nodes. To join the docker, ensure that your working directory is set to `<path-to-sit-aw-anchoring>` and give the command
 
 .. code-block:: bash
