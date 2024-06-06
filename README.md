@@ -1,6 +1,6 @@
 # sit-aw-anchoring
 
-sit-aw-anchoring implements the the semantic anchoring module.
+sit-aw-anchoring implements the semantic anchoring module.
 
 Semantic anchoring is the process in the robot situation awareness pipeline that integrates numerical data coming from perception with information in one (or more) digital twin(s), to produce a symbolic representation (belief) of current and predicted observations of operational environment.
 

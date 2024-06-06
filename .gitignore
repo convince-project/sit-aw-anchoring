@@ -1,0 +1,10 @@
+.vscode
+*.egg-info/
+*/build/
+*.pyc
+
+# Sphinx
+API/
+
+# docker build
+.build-docker
