@@ -1,0 +1,5 @@
+match
+  (agent: $a, target_cube: $c) isa is_reachable_by;
+  $a has name $an;
+  $c has name $cn;
+get;

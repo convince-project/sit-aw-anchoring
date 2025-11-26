@@ -1,0 +1,55 @@
+[
+    {
+      "id": "BlueCube",
+      "name": "Blue Cube",
+      "setup_properties": {
+        "class": "Cube"
+      },
+      "DT_config": [
+        {
+          "DigitalTwin": "XDE",
+          "id_DT": "A"
+        }
+      ]
+    },
+    {
+      "id": "GreenCube",
+      "name": "Green Cube",
+      "setup_properties": {
+        "class": "Cube"
+      },
+      "DT_config": [
+        {
+          "DigitalTwin": "XDE",
+          "id_DT": "B"
+        }
+      ]
+    },
+    {
+      "id": "RedCube",
+      "name": "Red Cube",
+      "setup_properties": {
+        "class": "Cube"
+      },
+      "DT_config": [
+        {
+          "DigitalTwin": "XDE",
+          "id_DT": "C"
+        }
+      ]
+    },
+    {
+      "id": "Gripper",
+      "name": "gripper",
+      "setup_properties": {
+        "class": "Agent"
+      },
+      "DT_config": [
+        {
+          "DigitalTwin": "XDE",
+          "id_DT": "gripper"
+        }
+      ]
+    }
+]
+  

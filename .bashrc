@@ -111,7 +111,7 @@ source /opt/ros/${ROS_DISTRO}/setup.bash
 echo "ros 2 ${ROS_DISTRO} sourced."
 
 # Source sit-aw-anchoring workspace if built
-if [ -f ~/sit-aw-anchoring/humble/install/setup.bash ]; then
-    source ~/sit-aw-anchoring/humble/install/setup.bash
+if [ -f ~/sit-aw-anchoring/humble_ws/install/setup.bash ]; then
+    source ~/sit-aw-anchoring/humble_ws/install/setup.bash
     echo "sit-aw-anchoring workspace sourced."
 fi

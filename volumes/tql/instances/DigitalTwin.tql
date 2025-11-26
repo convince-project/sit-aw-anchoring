@@ -1,0 +1,3 @@
+match
+  $d isa DigitalTwin_ID;
+get;

@@ -1,0 +1,27 @@
+[
+    {
+      "json-path": "position[0]",
+      "target-attr": "pos_x"
+    },
+    {
+      "json-path": "position[1]",
+      "target-attr": "pos_y"
+    },
+    {
+      "json-path": "position[2]",
+      "target-attr": "pos_z"
+    },
+    {
+      "json-path": "bounding_box.height",
+      "target-attr": "box_height"
+    },
+    {
+      "json-path": "bounding_box.width",
+      "target-attr": "box_width"
+    },
+    {
+      "json-path": "bounding_box.length",
+      "target-attr": "box_length"
+    }
+  ]
+  

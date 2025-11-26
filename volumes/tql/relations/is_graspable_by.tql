@@ -1,0 +1,6 @@
+match
+  (gripper: $a, cube: $c, grasp_pose: $p) isa is_graspable_by;
+  $a has name $an;
+  $c has name $cn;
+  $p has pos_x $px, has pos_y $py, has pos_z $pz;
+get;

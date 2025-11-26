@@ -1,0 +1,3 @@
+match
+  $p isa Pose;
+get;

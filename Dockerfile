@@ -14,6 +14,12 @@ ENV USERNAME=user
 RUN addgroup "$USERNAME" \
  && adduser "$USERNAME" --gid 1000
 
+# Give sudo privileges to the non-root user
+#RUN apt install -y sudo \
+#    && usermod -a -G sudo $USERNAME \
+#    && echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME \
+#    && chmod 0440 /etc/sudoers.d/$USERNAME
+
 RUN apt update &&\
 	apt install -y --no-install-recommends wget gedit python3-pip \
 	  nlohmann-json3-dev ros-humble-rmw-cyclonedds-cpp
@@ -22,6 +28,9 @@ ENV RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 
 ENV XDG_RUNTIME_DIR=/tmp/runtime-root
 RUN mkdir /usr/share/desktop-directories
+
+RUN python3 -m pip install --upgrade pip;	\
+    pip3 install pybullet
 
 RUN curl -1sLf \
   'https://repo.typedb.com/public/public-release/setup.deb.sh' \
@@ -36,9 +45,9 @@ RUN apt update &&\
 # Adjust executable name of typedb studio
 RUN ln -s /opt/typedb-studio/bin/TypeDB\ Studio /opt/typedb-studio/bin/typedb-studio
 
-RUN mkdir -p /home/"$USERNAME"/sit-aw-anchoring/humble
-COPY ./workspace/src /home/"$USERNAME"/sit-aw-anchoring/humble/src
-WORKDIR /home/"$USERNAME"/sit-aw-anchoring/humble
+RUN mkdir -p /home/"$USERNAME"/sit-aw-anchoring/humble_ws
+COPY ./volumes/humble_ws /home/"$USERNAME"/sit-aw-anchoring/humble_ws
+WORKDIR /home/"$USERNAME"/sit-aw-anchoring/humble_ws
 
 #Install missing dependencies (most of them should be tackeld above to optimise build time)
 RUN source /opt/ros/humble/setup.bash &&\
@@ -48,8 +57,8 @@ RUN source /opt/ros/humble/setup.bash &&\
 	rosdep install --from-paths src --ignore-src -r -y
 
 #Build the components (separate step to cache the rosdep installs)
-RUN source /opt/ros/humble/setup.bash &&\
-	colcon build --symlink-install
+#RUN source /opt/ros/humble/setup.bash &&\
+#	colcon build --symlink-install
 
 #Set the .bashrc
 COPY --chown="$USERNAME":"$USERNAME" ./.bashrc /home/"$USERNAME"/.bashrc
@@ -59,7 +68,4 @@ COPY --chown="$USERNAME":"$USERNAME" ./.bash_history /home/"$USERNAME"/.bash_his
 COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-
-#Prepare to work
-WORKDIR /home/"$USERNAME"
 

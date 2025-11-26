@@ -1,0 +1,19 @@
+[
+    { 
+      "json-path": "gripper.center[0]", 
+      "target-attr": "pos_x" 
+    },
+    { 
+      "json-path": "gripper.center[1]", 
+      "target-attr": "pos_y" 
+    },
+    { 
+      "json-path": "gripper.center[2]", 
+      "target-attr": "pos_z" 
+    },
+    { 
+      "json-path": "gripper.remaining_reach", 
+      "target-attr": "remaining_reach" 
+    }
+  ]
+  

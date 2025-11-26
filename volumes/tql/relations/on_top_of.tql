@@ -1,0 +1,5 @@
+match
+  (lower_cube: $l, upper_cube: $u) isa on_top_of;
+  $l has name $ln;
+  $u has name $un;
+get;

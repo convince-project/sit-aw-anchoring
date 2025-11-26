@@ -1,0 +1,3 @@
+match
+  (cube: $c, grasp_pose: $p) isa has_grasp_pose;
+get;

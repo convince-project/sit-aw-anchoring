@@ -1,0 +1,3 @@
+match
+  (asset: $c, twin: $t) isa has_id;
+get;
