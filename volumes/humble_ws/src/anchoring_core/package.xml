@@ -2,10 +2,11 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>anchoring_core</name>
-  <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="matteo.morelli@cea.fr">mm244911</maintainer>
-  <license>Apache-2.0</license>
+  <version>0.1.0</version>
+  <description>Base plugin for anchoring entity managers, the one to specialize for your ontology.</description>
+  <author email="matteo.morelli@cea.fr">Matteo MORELLI</author>
+  <maintainer email="matteo.morelli@cea.fr">Matteo MORELLI</maintainer>
+  <license>CeCILL-B</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 

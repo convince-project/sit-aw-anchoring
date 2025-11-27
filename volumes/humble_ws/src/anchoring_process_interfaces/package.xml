@@ -3,10 +3,8 @@
 	<name>anchoring_process_interfaces</name>
 	<version>0.1.0</version>
 	<description>Messages, service and action interfaces for the anchoring process.</description>
-  <author email="leonjubin@gmail.com">Léon JUBIN-HUERNE</author>
-  <author email="raphael.lallement@cea.fr">Raphaël LALLEMENT</author>
   <author email="matteo.morelli@cea.fr">Matteo MORELLI</author>
-  <maintainer email="raphael.lallement@cea.fr">Raphaël LALLEMENT</maintainer>
+  <author email="raphael.lallement@cea.fr">Raphaël LALLEMENT</author>
   <maintainer email="matteo.morelli@cea.fr">Matteo MORELLI</maintainer>
 	<license>CeCILL-B</license>
 
