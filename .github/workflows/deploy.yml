@@ -2,9 +2,9 @@ name: Deploy
 # Deploy sphinx documentation to GitHub Pages in docs branch
 
 on:
-    # Triggers the workflow on push or pull request events but only for the "main" branch
+    # Triggers the workflow on push or pull request events but only for the "release" branch
     push:
-        branches: [ "main" ]
+        branches: [ "release" ]
 
 jobs:
     build:
