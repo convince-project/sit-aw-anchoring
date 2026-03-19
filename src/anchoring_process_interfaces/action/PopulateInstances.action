@@ -1,0 +1,9 @@
+# attributes of goal
+string knowledge_domain
+string instances
+---
+# attributes of result
+process_msgs/Result result
+---
+# attributes of feedback
+process_msgs/Progress progress

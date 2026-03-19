@@ -1,0 +1,8 @@
+services:
+  sit-aw-anchoring:
+    build:
+      context: .
+      dockerfile: Dockerfile-humble
+    image: sit-aw-anchoring:0.3.0-humble #ghcr.io/convince-project/sit-aw-anchoring:0.3.0-humble
+    container_name: sit_aw_anchoring_030_humble_ctr
+
