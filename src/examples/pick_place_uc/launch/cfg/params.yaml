@@ -1,0 +1,20 @@
+anchoring_process:
+  ros__parameters:
+    typedb_server_addr: "localhost:1729"
+    entity_managers:
+      - "Cube"
+      - "Agent"
+    Cube:
+      plugin: "anchoring_cubesworld_plugin::CubeManager"
+    Agent:
+      plugin: "anchoring_cubesworld_plugin::GripperManager"
+    knowledge_domains:
+      - "CubesWorld"
+    CubesWorld:
+      database_name: "cubesworld-rosconfrde-25"
+      pkg: "anchoring_cubesworld_plugin"
+      schemas:
+        - "rules/schemas/attributes_classes.tql"
+        - "rules/schemas/relations.tql"
+        - "rules/schemas/rules.tql"
+

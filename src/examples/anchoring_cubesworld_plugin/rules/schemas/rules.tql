@@ -1,0 +1,66 @@
+        # Rules
+        # R1 ── on_top_of
+        rule cube_stack_1d:
+          when {
+            $a isa Cube, has pos_x $ax, has pos_y $ay, has pos_z $az, has box_width $aw, has box_length $al, has box_height $ah;
+            $b isa Cube, has pos_x $bx, has pos_y $by, has pos_z $bz, has box_width $bw, has box_length $bl, has box_height $bh;
+
+            ?a_top     = $az + ($ah / 2.0);
+            ?b_bottom  = $bz - ($bh / 2.0);
+            ?a_x_min   = $ax - ($aw / 2.0); ?a_x_max = $ax + ($aw / 2.0);
+            ?a_y_min   = $ay - ($al / 2.0); ?a_y_max = $ay + ($al / 2.0);
+                ?a_top == ?b_bottom;
+                {
+                    ?a_x_min <= $bx; $bx <= ?a_x_max;
+                } or {
+                    ?a_y_min <= $by; $by <= ?a_y_max;
+                };
+          } then {
+            (lower_cube: $a, upper_cube: $b) isa on_top_of;
+          };
+
+        # R2 ── is_reachable_by
+        rule reachable_if_top:
+          when {
+            # box is on the top
+            $c isa Cube;
+            not { (lower_cube: $c, upper_cube: $any) isa on_top_of; };
+
+            # Agent to center of Cube ≤ remaining_reach
+            $a isa Agent,
+              has pos_x $ax, has pos_y $ay, has pos_z $az,
+              has remaining_reach $r;
+            $c has pos_x $cx, has pos_y $cy, has pos_z $cz;
+
+            ?dx2 = ($cx - $ax) * ($cx - $ax);
+            ?dy2 = ($cy - $ay) * ($cy - $ay);
+            ?dz2 = ($cz - $az) * ($cz - $az);
+
+            ?dist2 = ?dx2 + ?dy2 + ?dz2;
+            ?r2 = $r * $r;
+            ?dist2 <= ?r2;
+          } then {
+            (agent: $a, target_cube: $c) isa is_reachable_by;
+          };
+
+        
+        # R3 ── is_graspable_by
+        rule graspable_if_reachable:
+          when {
+            (agent: $a, target_cube: $c) isa is_reachable_by;
+            (cube: $c, grasp_pose: $p)   isa has_grasp_pose;
+
+            $a has remaining_reach $r,
+               has pos_x $ax, has pos_y $ay, has pos_z $az;
+            $p has pos_x $px, has pos_y $py, has pos_z $pz;
+
+            ?dx2 = ($px - $ax) * ($px - $ax);
+            ?dy2 = ($py - $ay) * ($py - $ay);
+            ?dz2 = ($pz - $az) * ($pz - $az);
+
+            ?dist2 = ?dx2 + ?dy2 + ?dz2;
+            ?r2 = $r * $r;
+            ?dist2 <= ?r2;
+          } then {
+            (gripper: $a, cube: $c, grasp_pose: $p) isa is_graspable_by;
+          };

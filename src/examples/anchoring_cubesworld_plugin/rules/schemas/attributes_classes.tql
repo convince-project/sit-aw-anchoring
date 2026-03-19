@@ -1,0 +1,47 @@
+define
+
+        # Basic attributes
+        id              sub attribute, value string;
+        name            sub attribute, value string;
+        dt-id           sub attribute, value string;
+        platform-name   sub attribute, value string;
+        
+        pos_x          sub attribute, value double;
+        pos_y          sub attribute, value double;
+        pos_z          sub attribute, value double;
+        
+        box_height      sub attribute, value double;
+        box_width       sub attribute, value double;
+        box_length      sub attribute, value double;
+        
+        remaining_reach    sub attribute, value double;      # Robotic arm claws up to radius
+
+
+
+        # Classes
+        Cube sub entity,
+          owns id,
+          owns name,
+          owns pos_x,  
+          owns pos_y,  
+          owns pos_z,
+          owns box_height, 
+          owns box_width, 
+          owns box_length;
+
+        DigitalTwin_ID sub entity,
+          owns dt-id,
+          owns platform-name;
+
+        Agent sub entity,
+          owns id,
+          owns name,
+          owns pos_x, 
+          owns pos_y, 
+          owns pos_z,
+          owns remaining_reach;
+
+        Pose sub entity,
+          owns pos_x, 
+          owns pos_y, 
+          owns pos_z;

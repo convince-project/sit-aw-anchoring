@@ -1,0 +1,39 @@
+        # Relations
+        # Configured with Digital Twin
+        has_id sub relation,
+          relates asset,
+          relates twin;
+        
+        Cube plays has_id:asset;
+        Agent plays has_id:asset;
+        DigitalTwin_ID plays has_id:twin;
+
+        # ison
+        on_top_of sub relation,
+          relates lower_cube,
+          relates upper_cube;
+        Cube plays on_top_of:lower_cube;
+        Cube plays on_top_of:upper_cube;
+
+        # reachable
+        is_reachable_by sub relation,
+          relates agent,
+          relates target_cube;
+        Agent plays is_reachable_by:agent;
+        Cube  plays is_reachable_by:target_cube;
+
+        # 
+        has_grasp_pose sub relation,
+          relates cube,
+          relates grasp_pose;
+        Cube plays has_grasp_pose:cube;
+        Pose plays has_grasp_pose:grasp_pose;
+
+        # graspable
+        is_graspable_by sub relation,
+          relates gripper,
+          relates cube,
+          relates grasp_pose;
+        Agent plays is_graspable_by:gripper;
+        Cube  plays is_graspable_by:cube;
+        Pose  plays is_graspable_by:grasp_pose;

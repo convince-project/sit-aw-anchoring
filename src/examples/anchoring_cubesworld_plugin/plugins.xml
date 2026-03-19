@@ -1,0 +1,8 @@
+<library path="anchoring_cubesworld_plugin">
+  <class type="anchoring_cubesworld_plugin::CubeManager" base_class_type="anchoring_core::AnchoringManager">
+    <description>This is a CubeManager anchoring plugin.</description>
+  </class>
+  <class type="anchoring_cubesworld_plugin::GripperManager" base_class_type="anchoring_core::AnchoringManager">
+    <description>This is a GripperManager anchoring plugin.</description>
+  </class>
+</library>
