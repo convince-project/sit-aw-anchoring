@@ -1,0 +1,15 @@
+[
+    { 
+      "json-path": "grasp_point.position[0]", 
+      "target-attr": "pos_x" 
+    },
+    { 
+      "json-path": "grasp_point.position[1]", 
+      "target-attr": "pos_y" 
+    },
+    { 
+      "json-path": "grasp_point.position[2]", 
+      "target-attr": "pos_z" 
+    }
+  ]
+  
