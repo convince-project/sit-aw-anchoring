@@ -57,9 +57,9 @@ RUN source /opt/ros/jazzy/setup.bash &&\
 COPY --chown="$USERNAME":"$USERNAME" ./bashrc /home/"$USERNAME"/.bashrc
 
 #Set the entrypoint
-#COPY ./entrypoint.sh /entrypoint.sh
-#RUN chmod +x /entrypoint.sh
-#ENTRYPOINT ["/entrypoint.sh"]
+COPY ./entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
 #Move to workdir
 RUN mkdir -p /home/"$USERNAME"/dev/colcon_ws
