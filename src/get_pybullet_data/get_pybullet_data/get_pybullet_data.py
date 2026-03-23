@@ -1,9 +1,10 @@
-from example_interfaces.srv import Trigger
+from example_interfaces.srv import Trigger, AddTwoInts
 
 import rclpy
 from rclpy.node import Node
 
 import pybullet
+import json
 import time
 import math
 import os
@@ -13,20 +14,20 @@ AGENT_NAME   = "panda"
 MAX_REACH     = 0.855
 
 def get_data(client_id):
-    body_count = p.getNumBodies(physicsClientId=client_id)
+    body_count = pybullet.getNumBodies(physicsClientId=client_id)
     print(body_count)
     data = []
     letter_id = 0
     for i in range(body_count):
-        bid = p.getBodyUniqueId(i, physicsClientId=client_id)
+        bid = pybullet.getBodyUniqueId(i, physicsClientId=client_id)
         # pos, _ = pybullet_client.getBasePositionAndOrientation(bid, physicsClientId=client_id)
 
 
         # Robotic arm claws
-        body_name = p.getBodyInfo(bid, physicsClientId=client_id)[1].decode("utf-8")
+        body_name = pybullet.getBodyInfo(bid, physicsClientId=client_id)[1].decode("utf-8")
         if AGENT_NAME in body_name.lower():
-            base_pos, _ = p.getBasePositionAndOrientation(bid, physicsClientId=client_id)
-            grip_pos    = p.getLinkState(bid, GRIPPER_LINK, physicsClientId=client_id)[0]
+            base_pos, _ = pybullet.getBasePositionAndOrientation(bid, physicsClientId=client_id)
+            grip_pos    = pybullet.getLinkState(bid, GRIPPER_LINK, physicsClientId=client_id)[0]
 
             current_dist = math.dist(base_pos, grip_pos)          # Current extended length
             remaining    = max(0.0, MAX_REACH - current_dist)
@@ -45,14 +46,14 @@ def get_data(client_id):
 
 
         # Filter out the ground wall
-        mass = p.getDynamicsInfo(bid, -1)[0]
+        mass = pybullet.getDynamicsInfo(bid, -1)[0]
         if mass == 0:
             continue 
         # get position
-        pos, _ = p.getBasePositionAndOrientation(bid, physicsClientId=client_id)
+        pos, _ = pybullet.getBasePositionAndOrientation(bid, physicsClientId=client_id)
 
         # get bounding box
-        aabb_min, aabb_max = p.getAABB(bid, physicsClientId=client_id)
+        aabb_min, aabb_max = pybullet.getAABB(bid, physicsClientId=client_id)
         size = [aabb_max[j] - aabb_min[j] for j in range(3)]
         
         # Position of "pose"
@@ -79,7 +80,8 @@ def get_data(client_id):
             }
         })
         letter_id += 1
-    return ' '.join(data)
+    print(json.dumps(data))        
+    return json.dumps(data)
 
 
 class GetPybulletData(Node):
@@ -96,9 +98,10 @@ class GetPybulletData(Node):
             self.get_logger().info("Can't connect to Pybullet")
 
         else:
+            result = get_data(cid)
             response.success = True
-            response.message = get_data(cid)
-            self.get_logger().info("Sending Pybullet datas.")
+            response.message = result
+            self.get_logger().info(result)
 			
         return response
 

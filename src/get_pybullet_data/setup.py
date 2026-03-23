@@ -24,7 +24,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'service = get_pybullet_data.service_member_function:main',
+            'get_data = get_pybullet_data.get_pybullet_data:main',
+            'client = get_pybullet_data.client:main',
         ],
     },
 )
