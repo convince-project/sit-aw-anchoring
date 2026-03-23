@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'get_pybullet_data'
+package_name = 'pybullet_dt'
 
 setup(
     name=package_name,
@@ -24,8 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'get_data = get_pybullet_data.get_pybullet_data:main',
-            'client = get_pybullet_data.client:main',
+            'pybullet_dt = pybullet_dt.pybullet_dt:main',
         ],
     },
 )

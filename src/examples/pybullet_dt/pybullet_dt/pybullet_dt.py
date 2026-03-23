@@ -1,4 +1,4 @@
-from example_interfaces.srv import Trigger, AddTwoInts
+from std_srvs.srv import Trigger
 
 import rclpy
 from rclpy.node import Node
@@ -84,11 +84,11 @@ def get_data(client_id):
     return json.dumps(data)
 
 
-class GetPybulletData(Node):
+class PyBulletDT(Node):
 
     def __init__(self):
-        super().__init__('get_pybullet_data')
-        self.srv = self.create_service(Trigger, 'get_pybullet_data', self.get_data_callback)
+        super().__init__('pybullet_dt')
+        self.srv = self.create_service(Trigger, '~/get_data', self.get_data_callback)
 
     def get_data_callback(self, request, response):
         cid = pybullet.connect(pybullet.SHARED_MEMORY)
@@ -109,9 +109,9 @@ class GetPybulletData(Node):
 def main():
     rclpy.init()
 
-    get_pybullet_data = GetPybulletData()
+    pybullet_dt = PyBulletDT()
 
-    rclpy.spin(get_pybullet_data)
+    rclpy.spin(pybullet_dt)
 
     rclpy.shutdown()
 

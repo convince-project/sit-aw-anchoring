@@ -63,22 +63,15 @@ struct DTConfig {
 class DTSimulator {
 public:
     /**
-     * Reads the specified JSON array file and returns the object
+     * Reads the specified JSON array and returns the object
      * whose "dt_id" matches dtId.
      * @param dtId          The Digital Twin identifier to search for.
-     * @param dataFilePath  Path to the JSON file containing DT records.
+     * @param all_data      A JSON object representing all the DT records.
      * @return              A JSON object representing the matched DT record.
      */
     static json fetchDTData(const std::string &dtId,
-                                      const std::string &dataFilePath) {
-        std::ifstream in(dataFilePath);
-        if (!in.is_open()) {
-            throw std::runtime_error("DTSimulator: cannot open " + dataFilePath);
-        }
-        json arr;
-        in >> arr;  // Parse the entire JSON array
-
-        for (const auto &entry : arr) {
+                                      const json all_data) {
+        for (const auto &entry : all_data) {
             if (entry.value("dt_id", "") == dtId) {
                 return entry;
             }

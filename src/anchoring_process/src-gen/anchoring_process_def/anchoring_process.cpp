@@ -19,6 +19,8 @@
 // include associated header file
 #include "anchoring_process_def/anchoring_process.h"
 
+#include <rclcpp/version.h>
+
 // Derived includes directives
 #include "anchoring_process_def/anchoring_process_impl.h"
 #include "anchoring_process_def/anchoring_process_main.h"
@@ -26,6 +28,21 @@
 #include "rclcpp_action/rclcpp_action.hpp"
 
 namespace anchoring_process_def {
+
+// Function to support both Rolling and Humble on the main branch
+// Rolling has deprecated the version of the create_client method that takes
+// rmw_qos_profile_services_default for the QoS argument
+#if RCLCPP_VERSION_GTE(17, 0, 0)  // Rolling
+auto qosDefault()
+{
+  return rclcpp::SystemDefaultsQoS();
+}
+#else  // Humble
+auto qosDefault()
+{
+  return rmw_qos_profile_services_default;
+}
+#endif
 
 // static attributes (if any)
 
@@ -39,7 +56,11 @@ anchoring_process::anchoring_process(rclcpp::NodeOptions /*in*/options) :
   // Create callback group(s)
   cbg_Activity01_ = create_callback_group(
       rclcpp::CallbackGroupType::MutuallyExclusive);
+  dt_client_cb_group_ = create_callback_group(
+      rclcpp::CallbackGroupType::MutuallyExclusive);
 
+  declare_parameter("dt.service_name", "/dt/get_data");
+  declare_parameter("dt.timeout", 2);
 }
 
 rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn
@@ -47,6 +68,33 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn
 {
 
     RCLCPP_INFO(get_logger(), "Configuring (base)");
+
+    // dt-related parameters
+    dt_service_name_ = this->get_parameter("dt.service_name").as_string();
+    if (dt_service_name_.empty()) {
+      RCLCPP_ERROR(get_logger(), "Parameter 'dt.service_name' is empty!");
+      return CallbackReturn::FAILURE;
+    }
+
+    dt_timeout_ = this->get_parameter("dt.timeout").as_int();
+    if (dt_timeout_ <= 0) {
+      RCLCPP_WARN(
+        get_logger(),
+        "Parameter 'dt.timeout' is <= 0. Using default 2 seconds");
+      dt_timeout_ = 2;
+    }    
+
+    // Create dt client
+    dt_client_ptr_ = this->create_client<std_srvs::srv::Trigger>(
+      dt_service_name_,
+      qosDefault(),
+      dt_client_cb_group_
+    );
+    if (!dt_client_ptr_->wait_for_service(
+          std::chrono::duration<int>(dt_timeout_))) {
+      RCLCPP_ERROR(get_logger(), "DT service not available after timeout");
+      return rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn::FAILURE;
+    }
 
     // set_ontology action server
     set_ontology_actsrv_ =
