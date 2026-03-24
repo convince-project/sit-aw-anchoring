@@ -21,6 +21,7 @@
 
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
+#include "std_srvs/srv/trigger.hpp"
 #include "anchoring_process_interfaces/action/set_ontology.hpp"
 #include "anchoring_process_interfaces/action/populate_instances.hpp"
 #include "anchoring_process_interfaces/action/update_state.hpp"
@@ -99,6 +100,18 @@ protected:
    * 
    */
   rclcpp::CallbackGroup::SharedPtr cbg_Activity01_;
+  rclcpp::CallbackGroup::SharedPtr dt_client_cb_group_;
+
+  /**
+   *
+   */
+  std::string dt_service_name_;
+  int dt_timeout_;
+
+  /**
+   *
+   */
+  rclcpp::Client<std_srvs::srv::Trigger>::SharedPtr dt_client_ptr_;
 
   /**
    * 

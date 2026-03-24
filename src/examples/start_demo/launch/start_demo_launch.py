@@ -46,19 +46,19 @@ def generate_launch_description():
 #ros2 action send_goal /anchoring_process/update_state anchoring_process_interfaces/action/UpdateState "{knowledge_domain: 'CubesWorld', instances: '/tmp/dt/runtime.json'}"
 
 	# Terminal 4 : Export DT data
-	#pybullet_data = Node(
-	#	package = 'get_pybullet_data',
-	#	executable = 'get_data'
-	#)
+	pybullet_data = Node(
+		package = 'get_pybullet_data',
+		executable = 'get_data'
+	)
 
 	# For now, the json still exists
-	export_json = ExecuteProcess(
-		cmd=[[
-			'cd /tmp/dt &&',
-			'python3 update_json.py'
-		]],
-		shell=True
-	)
+	#export_json = ExecuteProcess(
+	#	cmd=[[
+	#		'cd /tmp/dt &&',
+	#		'python3 update_json.py'
+	#	]],
+	#	shell=True
+	#)
 
 	# Terminal 2 : Start TypeDB studio
 	typedb_studio = ExecuteProcess(
@@ -74,7 +74,7 @@ def generate_launch_description():
 	ld.add_entity(start_simulation)
 	ld.add_entity(anchoring_process_node)
 	ld.add_entity(anchoring_configure_and_activate)
-	ld.add_entity(export_json)
+	ld.add_entity(pybullet_data)
 	ld.add_entity(typedb_studio)
 
 	return ld

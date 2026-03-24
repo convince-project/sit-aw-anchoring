@@ -60,7 +60,9 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn
   anchoring_process_impl::on_configure(const rclcpp_lifecycle::State & state)
 {
     // base implem.
-    anchoring_process::on_configure(state);
+    if (anchoring_process::on_configure(state) ==
+          rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn::FAILURE)
+      return rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn::FAILURE;
  
     RCLCPP_INFO(get_logger(), "Configuring (impl)");
    
@@ -370,13 +372,27 @@ void anchoring_process_impl::update_state_accepted(
             c.cls.c_str(), c.parentInstanceId.c_str(), c.dtId.c_str(), c.platform.c_str());
 
     // Process each DT_Config entry (Step 4)
-    const std::string dtFile = goal->instances;
+    //
+
+    // do a synch data request to the DT
+    auto request = std::make_shared<std_srvs::srv::Trigger::Request>();
+    auto response_future = dt_client_ptr_->async_send_request(request);
+    if (response_future.wait_for(std::chrono::seconds(dt_timeout_)) != std::future_status::ready) {
+      RCLCPP_ERROR(this->get_logger(),
+        "Digital twin service server did not respond within timeout of %ld seconds. Request is discarded.",
+         std::chrono::seconds(dt_timeout_).count());
+      dt_client_ptr_->remove_pending_request(response_future);
+      goal_handle->abort(result);
+      return;
+    }
+    // parse the data
+    json all_dt_data = json::parse(response_future.get()->message);
     for (auto &c : configs)
     {
       try
       {
-        // Fetch the DT JSON
-        json dt_data = DTSimulator::fetchDTData(c.dtId, dtFile);
+        // Fetch the DT JSON for the element c.dtId
+        json dt_data = DTSimulator::fetchDTData(c.dtId, all_dt_data);
         // entity-specific queries
         std::vector<std::string> queries;
         std::vector<std::string> cls_queries = managers_[c.cls]->generateUpdateStateQueries(c.parentInstanceId, dt_data);

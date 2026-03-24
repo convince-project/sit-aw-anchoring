@@ -18,6 +18,7 @@ find_package(nlohmann_json REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
 find_package(rclcpp_action REQUIRED)
+find_package(std_srvs REQUIRED)
 find_package(anchoring_process_interfaces REQUIRED)
 find_package(anchoring_core REQUIRED)
 find_package(pluginlib REQUIRED)
@@ -41,6 +42,7 @@ ament_target_dependencies(anchoring_process
 	rclcpp
 	rclcpp_lifecycle
 	rclcpp_action
+	std_srvs
 	anchoring_process_interfaces
  	anchoring_core
  	pluginlib
