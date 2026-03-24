@@ -1,29 +1,19 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-<<<<<<<< HEAD:src/examples/start_demo/package.xml
-  <name>start_demo</name>
-========
   <name>pybullet_dt</name>
->>>>>>>> main:src/examples/pybullet_dt/package.xml
   <version>0.0.0</version>
   <description>TODO: Package description</description>
   <maintainer email="jeremie.bodin@cea.fr">jb282126</maintainer>
   <license>TODO: License declaration</license>
 
-<<<<<<<< HEAD:src/examples/start_demo/package.xml
-  <buildtool_depend>ament_cmake</buildtool_depend>
-========
   <depend>rclpy</depend>
   <depend>std_srvs</depend>
->>>>>>>> main:src/examples/pybullet_dt/package.xml
-
-  <depend>rclcpp</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
 
   <export>
-    <build_type>ament_cmake</build_type>
+    <build_type>ament_python</build_type>
   </export>
 </package>

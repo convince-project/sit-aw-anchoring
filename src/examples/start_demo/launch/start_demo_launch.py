@@ -47,8 +47,8 @@ def generate_launch_description():
 
 	# Terminal 4 : Export DT data
 	pybullet_data = Node(
-		package = 'get_pybullet_data',
-		executable = 'get_data'
+		package = 'pybullet_dt',
+		executable = 'pybullet_dt'
 	)
 
 	# For now, the json still exists
