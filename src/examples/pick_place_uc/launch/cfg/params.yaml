@@ -1,5 +1,8 @@
 anchoring_process:
   ros__parameters:
+    dt:
+      service_name: "/pybullet_dt/get_data"
+      timeout: 2    # seconds
     typedb_server_addr: "localhost:1729"
     entity_managers:
       - "Cube"
