@@ -73,7 +73,7 @@ protected:
   /**
    * @brief Extract nested value from JSON using a dotted path with optional indices
    */
-  double extractValue (const nlohmann::json &root, const std::string &path)
+  nlohmann::json extractValue (const nlohmann::json &root, const std::string &path)
   {
     nlohmann::json cur = root;
     std::string token;
@@ -93,7 +93,7 @@ protected:
         cur = cur.at(token);
       }
     }
-    return cur.get<double>();
+    return cur;
   }
 
   /**

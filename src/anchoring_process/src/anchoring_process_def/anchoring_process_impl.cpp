@@ -148,27 +148,26 @@ void anchoring_process_impl::set_ontology_accepted(
     std::string dbname = databases_.find(goal->knowledge_domain)->second;
 
     // Insert Schema
-    // - setup
     std::vector<std::string> schemas = schemas_.find(goal->knowledge_domain)->second;
-    std::ostringstream schema;
-    //    process (read) each schema
     for (const std::string& s : schemas) {
+      // - read
+      std::ostringstream schema;
       std::ifstream st(s);
       schema << st.rdbuf() << "\n";
-    }
-    // - write
-    try
-    {
-      TypeDBClient::write_schema(schema.str(), driver_, dbname);
-    }
-    catch (const std::exception &e)
-    {
-      // terminate action (failure!)
-      result->result.message = std::string(e.what());
-      RCLCPP_FATAL(this->get_logger(), "[set_ontology] Unable to set the ontology in the database: %s", e.what());
-      goal_handle->abort(result);
-      return;
-    }
+      // - write
+      try
+      {
+        TypeDBClient::write_schema(schema.str(), driver_, dbname);
+      }
+      catch (const std::exception &e)
+      {
+        // terminate action (failure!)
+        result->result.message = std::string(e.what());
+        RCLCPP_FATAL(this->get_logger(), "[set_ontology] Unable to set the ontology in the database: %s", e.what());
+        goal_handle->abort(result);
+        return;
+      }
+}
 
     // terminate action (success!)
     RCLCPP_INFO(this->get_logger(), "[set_ontology] Request for goal %s executed successfully.", rclcpp_action::to_string(goal_handle->get_goal_id()).c_str());
@@ -285,8 +284,18 @@ void anchoring_process_impl::populate_instances_accepted(
     }
 
     // - write
-    TypeDBClient::insert_data(queries, driver_, dbname);
-
+    try
+    {
+      TypeDBClient::insert_data(queries, driver_, dbname);
+    }
+    catch (const std::exception &e)
+    {
+      // terminate action (failure!)
+      result->result.message = std::string(e.what());
+      RCLCPP_FATAL(this->get_logger(), "[populate_instances] Unable to insert data in the database: %s", e.what());
+      goal_handle->abort(result);
+      return;
+    }
 
     // terminate action (success!)
     RCLCPP_INFO(this->get_logger(), "[populate_instances] Request for goal %s executed successfully.", rclcpp_action::to_string(goal_handle->get_goal_id()).c_str());
@@ -408,7 +417,7 @@ void anchoring_process_impl::update_state_accepted(
       {
         // terminate action (failure!)
         result->result.message = std::string(e.what());
-        RCLCPP_FATAL(this->get_logger(), "[update_state] Error for dt-id=%s : %s!", c.dtId.c_str(), e.what());
+        RCLCPP_FATAL(this->get_logger(), "[update_state] Unable to update data in the database (dt-id=%s) : %s", c.dtId.c_str(), e.what());
         goal_handle->abort(result);
         return;
       }

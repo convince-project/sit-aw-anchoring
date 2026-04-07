@@ -1,0 +1,15 @@
+[
+    {
+      "json-path": "bounding_box.height",
+      "target-attr": "height"
+    },
+    {
+      "json-path": "bounding_box.width",
+      "target-attr": "width"
+    },
+    {
+      "json-path": "bounding_box.length",
+      "target-attr": "length"
+    }
+]
+  

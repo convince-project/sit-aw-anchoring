@@ -1,3 +1,5 @@
+define
+
         # Rules
         # R1 ── on_top_of
         rule cube_stack_1d:

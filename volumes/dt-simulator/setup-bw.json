@@ -3,7 +3,7 @@
       "id": "BlueCube",
       "name": "Blue Cube",
       "setup_properties": {
-        "class": "block"
+        "class": "Cube"
       },
       "DT_config": [
         {
@@ -16,7 +16,7 @@
       "id": "GreenCube",
       "name": "Green Cube",
       "setup_properties": {
-        "class": "block"
+        "class": "Cube"
       },
       "DT_config": [
         {
@@ -29,7 +29,7 @@
       "id": "RedCube",
       "name": "Red Cube",
       "setup_properties": {
-        "class": "block"
+        "class": "Cube"
       },
       "DT_config": [
         {
@@ -42,7 +42,7 @@
       "id": "Gripper",
       "name": "gripper",
       "setup_properties": {
-        "class": "gripper"
+        "class": "Agent"
       },
       "DT_config": [
         {

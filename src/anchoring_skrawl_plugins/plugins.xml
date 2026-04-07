@@ -1,0 +1,29 @@
+<library path="anchoring_skrawl_plugins">
+  <class type="anchoring_skrawl_plugins::BlockManager" base_class_type="anchoring_core::AnchoringManager">
+    <description>This is the anchoring plugin that manages block entities in SKRAWL.</description>
+  </class>
+  <class type="anchoring_skrawl_plugins::TableManager" base_class_type="anchoring_core::AnchoringManager">
+    <description>This is the anchoring plugin that manages table entities in SKRAWL.</description>
+  </class>
+  <class type="anchoring_skrawl_plugins::StorageManager" base_class_type="anchoring_core::AnchoringManager">
+    <description>This is the anchoring plugin that manages storage entities in SKRAWL.</description>
+  </class>
+  <class type="anchoring_skrawl_plugins::SodaManager" base_class_type="anchoring_core::AnchoringManager">
+    <description>This is the anchoring plugin that manages soda entities in SKRAWL.</description>
+  </class>
+  <class type="anchoring_skrawl_plugins::SnacksManager" base_class_type="anchoring_core::AnchoringManager">
+    <description>This is the anchoring plugin that manages snacks entities in SKRAWL.</description>
+  </class>
+  <class type="anchoring_skrawl_plugins::ButterManager" base_class_type="anchoring_core::AnchoringManager">
+    <description>This is the anchoring plugin that manages butter entities in SKRAWL.</description>
+  </class>
+  <class type="anchoring_skrawl_plugins::PlaceSkillManager" base_class_type="anchoring_core::AnchoringManager">
+    <description>This is the anchoring plugin that manages place relations in SKRAWL.</description>
+  </class>
+  <class type="anchoring_skrawl_plugins::RobotManager" base_class_type="anchoring_core::AnchoringManager">
+    <description>This is the anchoring plugin that manages robot entities in SKRAWL.</description>
+  </class>
+  <class type="anchoring_skrawl_plugins::GripperManager" base_class_type="anchoring_core::AnchoringManager">
+    <description>This is a GripperManager anchoring plugin.</description>
+  </class>
+</library>
