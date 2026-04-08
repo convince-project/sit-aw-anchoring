@@ -1,8 +1,20 @@
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, RegisterEventHandler, ExecuteProcess, EmitEvent, IncludeLaunchDescription, TimerAction
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
+
+from launch.events import matches_action
+
+from launch.event_handlers import OnProcessStart
+
 from launch_ros.actions import LifecycleNode, Node
 from launch_ros.substitutions import FindPackageShare
+
+from launch_ros.events.lifecycle import ChangeState
+
+from launch_ros.event_handlers import OnStateTransition
+
+from lifecycle_msgs.msg import Transition
+
 from ament_index_python.packages import get_package_share_directory
 
 share_dir = get_package_share_directory('start_demo')
@@ -25,7 +37,7 @@ def generate_launch_description():
 	)
 
 	# Terminal 5 : Launch pick_place_uc
-	anchoring_process_node = IncludeLaunchDescription(
+	anchoring_process_launch = IncludeLaunchDescription(
 		PathJoinSubstitution([
 			FindPackageShare('pick_place_uc'),
 			'launch',
@@ -33,16 +45,60 @@ def generate_launch_description():
 		])
 	)
 
+	anchoring_process_node = [x for x in anchoring_process_launch.get_sub_entities()[0].visit(1) if isinstance(x, LifecycleNode)][0]
+
 	# Terminal 6 : Setup the anchoring process
-	anchoring_configure_and_activate = ExecuteProcess(
-		cmd=[[
-			'ros2 lifecycle set /anchoring_process configure &&',
-			'ros2 lifecycle set /anchoring_process activate &&',
-			'ros2 action send_goal /anchoring_process/set_ontology anchoring_process_interfaces/action/SetOntology "{knowledge_domain: \'CubesWorld\'}" &&',
-			'ros2 action send_goal /anchoring_process/populate_instances anchoring_process_interfaces/action/PopulateInstances "{knowledge_domain: \'CubesWorld\', instances: \'/tmp/dt/setup.json\'}"',
-		]],
-		shell=True
+	configure = RegisterEventHandler(
+		OnProcessStart(
+			target_action = typedb_server,
+			on_start = [
+				TimerAction(
+					period = 4.0,
+					actions = [
+						EmitEvent(
+							event=ChangeState(
+								lifecycle_node_matcher=matches_action(anchoring_process_node),
+								transition_id=Transition.TRANSITION_CONFIGURE
+							)
+						)
+					],
+				)
+			]
+		)
 	)
+
+	activate = RegisterEventHandler(
+		OnStateTransition(
+			target_lifecycle_node=anchoring_process_node,
+			goal_state="inactive",
+			entities=[
+				EmitEvent(
+					event=ChangeState(
+						lifecycle_node_matcher=matches_action(anchoring_process_node),
+						transition_id=Transition.TRANSITION_ACTIVATE
+					)
+				)
+			],
+		)
+	)
+
+
+	anchoring_set_ontology_and_populate = RegisterEventHandler(
+		OnStateTransition(
+			target_lifecycle_node=anchoring_process_node,
+			goal_state="active",
+			entities=[
+				ExecuteProcess(
+					cmd=[[
+						'ros2 action send_goal /anchoring_process/set_ontology anchoring_process_interfaces/action/SetOntology "{knowledge_domain: \'CubesWorld\'}" &&',
+						'ros2 action send_goal /anchoring_process/populate_instances anchoring_process_interfaces/action/PopulateInstances "{knowledge_domain: \'CubesWorld\', instances: \'/tmp/dt/setup.json\'}"',
+					]],
+					shell=True
+				)
+			],
+		)
+	)
+	
 #ros2 action send_goal /anchoring_process/update_state anchoring_process_interfaces/action/UpdateState "{knowledge_domain: 'CubesWorld', instances: '/tmp/dt/runtime.json'}"
 
 	# Terminal 4 : Export DT data
@@ -50,15 +106,6 @@ def generate_launch_description():
 		package = 'pybullet_dt',
 		executable = 'pybullet_dt'
 	)
-
-	# For now, the json still exists
-	#export_json = ExecuteProcess(
-	#	cmd=[[
-	#		'cd /tmp/dt &&',
-	#		'python3 update_json.py'
-	#	]],
-	#	shell=True
-	#)
 
 	# Terminal 2 : Start TypeDB studio
 	typedb_studio = ExecuteProcess(
@@ -72,9 +119,11 @@ def generate_launch_description():
 	ld = LaunchDescription()
 	ld.add_entity(typedb_server)
 	ld.add_entity(start_simulation)
-	ld.add_entity(anchoring_process_node)
-	ld.add_entity(anchoring_configure_and_activate)
 	ld.add_entity(pybullet_data)
+	ld.add_entity(anchoring_process_node)
+	ld.add_entity(configure)
+	ld.add_entity(activate)
+	ld.add_entity(anchoring_set_ontology_and_populate)
 	ld.add_entity(typedb_studio)
 
 	return ld
