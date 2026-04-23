@@ -1,0 +1,4 @@
+anchoring_process:
+  ros__parameters:
+    typedb_server_addr: "localhost:1729"
+

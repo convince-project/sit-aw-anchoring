@@ -25,9 +25,10 @@ chown -R "$USERNAME":"$USERNAME" /home/"$USERNAME"
 
 echo "Done."
 
+
 # Execute the main command as the user using su
-if [ -z "$@" ]; then
+if [[ -z "$@" ]]; then
   exec su user -P -c "/bin/bash"
 else
-  exec su user -P -c "exec \"$@\""
+  exec su user -P -c "exec $@"
 fi

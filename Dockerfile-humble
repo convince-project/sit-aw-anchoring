@@ -56,6 +56,12 @@ RUN source /opt/ros/humble/setup.bash &&\
 #Set the .bashrc
 COPY --chown="$USERNAME":"$USERNAME" ./bashrc /home/"$USERNAME"/.bashrc
 
+#Set the typedb-studio connection
+#For the root user (when connecting to the docker through exec)
+COPY --chown="$USERNAME":"$USERNAME" ./typedb-studio.properties /root/.typedb-studio/properties/typedb-studio.properties
+#For the user created when running the entrypoint
+COPY --chown="$USERNAME":"$USERNAME" ./typedb-studio.properties /home/user/.typedb-studio/properties/typedb-studio.properties
+
 #Set the entrypoint
 COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

@@ -79,8 +79,7 @@ def get_data(client_id):
                 "position": top_center
             }
         })
-        letter_id += 1
-    print(json.dumps(data))        
+        letter_id += 1 
     return json.dumps(data)
 
 

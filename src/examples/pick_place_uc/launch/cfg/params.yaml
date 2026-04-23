@@ -3,7 +3,6 @@ anchoring_process:
     dt:
       service_name: "/pybullet_dt/get_data"
       timeout: 2    # seconds
-    typedb_server_addr: "localhost:1729"
     entity_managers:
       - "Cube"
       - "Agent"
@@ -19,5 +18,4 @@ anchoring_process:
       schemas:
         - "rules/schemas/attributes_classes.tql"
         - "rules/schemas/relations.tql"
-        - "rules/schemas/rules.tql"
-
+        - "rules/schemas/rules.tql"    
