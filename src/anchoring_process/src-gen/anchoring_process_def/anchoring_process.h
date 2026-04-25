@@ -105,13 +105,13 @@ protected:
   /**
    *
    */
-  std::string dt_service_name_;
+  std::vector<std::string> dt_service_names_;
   int dt_timeout_;
 
   /**
    *
    */
-  rclcpp::Client<std_srvs::srv::Trigger>::SharedPtr dt_client_ptr_;
+  std::vector<rclcpp::Client<std_srvs::srv::Trigger>::SharedPtr> dt_clients_;
 
   /**
    * 
