@@ -50,6 +50,19 @@
           "id_DT": "gripper"
         }
       ]
+    },
+    {
+      "id": "_place44",
+      "name": "place 44",
+      "setup_properties": {
+        "class": "place"
+      },
+      "DT_config": [
+        {
+          "DigitalTwin": "btcpp",
+          "id_DT": "place44"
+        }
+      ]
     }
 ]
-  
+

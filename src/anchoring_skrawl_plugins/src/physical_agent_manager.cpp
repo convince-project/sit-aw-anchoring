@@ -26,18 +26,23 @@ namespace anchoring_skrawl_plugins
     // Call base implementation
     queries = PhysicalEntityManager::generatePopulateInstanceQueries(elem);
 
-    // - capabilities (insert an agent capability only if it doesn't exist already)
+    // - capabilities
     auto id = elem.value("id", "");
-    std::string q;
-    q = "match $a isa " + getType() + ", has id \""   + id     + "\"; "
-              "$t type " + getCapability() + "; "
-              "not { $x isa $t; }; "
-        "insert $c isa $t; ";
-    queries.push_back(q);
-    q = "match $a isa " + getType() + ", has id \""   + id     + "\"; "
-              "$c isa " + getCapability() + "; "
-        "insert (bearer: $a, capability: $c) isa has_capability; ";
-    queries.push_back(q);
+    std::string t = getType();
+    for (auto c : getCapabilities())
+    {
+      // insert an agent capability only if it doesn't exist already
+      std::string q;
+      q = "match $a isa " + t + ", has id \""   + id     + "\"; "
+                "$t type " + c + "; "
+                "not { $x isa $t; }; "
+          "insert $c isa $t; ";
+      queries.push_back(q);
+      q = "match $a isa " + t + ", has id \""   + id     + "\"; "
+                "$c isa " + c + "; "
+          "insert (bearer: $a, capability: $c) isa has_capability; ";
+      queries.push_back(q);
+    }
 
     // return
     return queries;

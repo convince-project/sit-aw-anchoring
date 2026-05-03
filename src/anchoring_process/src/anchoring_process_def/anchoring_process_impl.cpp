@@ -249,6 +249,15 @@ void anchoring_process_impl::populate_instances_accepted(
         auto name = e.value("name", "");
         auto cls  = e["setup_properties"].value("class", "");
 
+        // check that the manager corresponding to the element is registered
+        auto it = managers_.find(cls);
+        if (it == managers_.end()) {
+          result->result.message = "[populate_instances] Unable to access the plugin manager of class \"" + cls + "\"";
+          RCLCPP_FATAL(this->get_logger(), result->result.message.c_str());
+          goal_handle->abort(result);
+          return;
+        }
+
         // insert instance
         std::string q = "insert $x isa " + cls +
                         ", has id \"" + id +

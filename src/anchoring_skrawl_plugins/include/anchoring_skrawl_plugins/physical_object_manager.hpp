@@ -17,7 +17,7 @@ public:
 
 protected:
 
-  virtual std::string getDisposition() const = 0;
+  virtual std::vector<std::string> getDispositions() const = 0;
 
 };
 

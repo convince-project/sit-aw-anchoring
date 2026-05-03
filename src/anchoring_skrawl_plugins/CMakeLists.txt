@@ -23,7 +23,7 @@ add_library(anchoring_skrawl_plugins
   src/physical_agent_manager.cpp
   src/anchoring_skrawl_physical_object_managers_plugin.cpp
   src/anchoring_skrawl_physical_agent_managers_plugin.cpp
-  src/anchoring_skrawl_gripper_manager_plugin.cpp
+#  src/anchoring_skrawl_gripper_manager_plugin.cpp
   src/anchoring_skrawl_place_skill_manager_plugin.cpp
 )
 

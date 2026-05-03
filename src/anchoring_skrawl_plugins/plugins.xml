@@ -2,6 +2,9 @@
   <class type="anchoring_skrawl_plugins::BlockManager" base_class_type="anchoring_core::AnchoringManager">
     <description>This is the anchoring plugin that manages block entities in SKRAWL.</description>
   </class>
+  <class type="anchoring_skrawl_plugins::SurfaceManager" base_class_type="anchoring_core::AnchoringManager">
+    <description>This is the anchoring plugin that manages surface entities in SKRAWL.</description>
+  </class>
   <class type="anchoring_skrawl_plugins::TableManager" base_class_type="anchoring_core::AnchoringManager">
     <description>This is the anchoring plugin that manages table entities in SKRAWL.</description>
   </class>

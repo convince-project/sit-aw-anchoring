@@ -17,7 +17,7 @@ public:
 
 protected:
 
-  virtual std::string getCapability() const = 0;
+  virtual std::vector<std::string> getCapabilities() const = 0;
 
 };
 

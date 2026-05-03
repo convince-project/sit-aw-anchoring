@@ -10,6 +10,7 @@ import math
 import os
 
 GRIPPER_LINK  = 11
+HAND_BODY     = 8
 AGENT_NAME   = "panda"
 MAX_REACH     = 0.855
 
@@ -26,8 +27,19 @@ def get_data(client_id):
         # Robotic arm claws
         body_name = pybullet.getBodyInfo(bid, physicsClientId=client_id)[1].decode("utf-8")
         if AGENT_NAME in body_name.lower():
+#            for i in range(pybullet.getNumJoints(bid)):
+#              info = pybullet.getJointInfo(bid, i)
+#              link_name = info[12].decode("utf-8")
+#              print(i, link_name)
             base_pos, _ = pybullet.getBasePositionAndOrientation(bid, physicsClientId=client_id)
             grip_pos    = pybullet.getLinkState(bid, GRIPPER_LINK, physicsClientId=client_id)[0]
+
+            aabb_min, aabb_max = pybullet.getAABB(
+                bid,
+                linkIndex=HAND_BODY,
+                physicsClientId=client_id
+            )
+            size = [aabb_max[j] - aabb_min[j] for j in range(3)]
 
             current_dist = math.dist(base_pos, grip_pos)          # Current extended length
             remaining    = max(0.0, MAX_REACH - current_dist)
@@ -38,8 +50,13 @@ def get_data(client_id):
                     "center": [round(grip_pos[0], 3),
                                round(grip_pos[1], 3),
                                round(grip_pos[2], 3)],
-                    "remaining_reach": round(remaining, 3)
-                }
+                    "remaining_reach": round(remaining, 3),
+                },
+                "bounding_box": {
+                    "width":  round(size[0], 3),
+                    "length": round(size[1], 3),
+                    "height": round(size[2], 3),
+                },
             })
             continue
 
@@ -80,6 +97,20 @@ def get_data(client_id):
             }
         })
         letter_id += 1 
+
+        # mockup failure of place action
+        data.append({
+                "dt_id": "place44",
+                "place_def": {
+                    "param": {
+                        "who"  : "gripper",
+                        "what" : "A",
+                        "where": "C"
+                    },
+                    "result": "failure"
+                }
+        })
+
     return json.dumps(data)
 
 

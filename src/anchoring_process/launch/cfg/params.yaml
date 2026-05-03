@@ -3,11 +3,35 @@ anchoring_process:
     typedb_server_addr: "localhost:1729"
     entity_managers:
       - "block"
+      - "surface"
       - "gripper"
+      - "table"
+      - "storage_object"
+      - "soda"
+      - "snacks"
+      - "butter"
+      - "robot"
+      - "place"
     block:
       plugin: "anchoring_skrawl_plugins::BlockManager"
+    surface:
+      plugin: "anchoring_skrawl_plugins::SurfaceManager"
     gripper:
       plugin: "anchoring_skrawl_plugins::GripperManager"
+    table:
+      plugin: "anchoring_skrawl_plugins::TableManager"
+    storage_object:
+      plugin: "anchoring_skrawl_plugins::StorageManager"
+    soda:
+      plugin: "anchoring_skrawl_plugins::SodaManager"
+    snacks:
+      plugin: "anchoring_skrawl_plugins::SnacksManager"
+    butter:
+      plugin: "anchoring_skrawl_plugins::ButterManager"
+    robot:
+      plugin: "anchoring_skrawl_plugins::RobotManager"
+    place:
+      plugin: "anchoring_skrawl_plugins::PlaceSkillManager"
     knowledge_domains:
       - "SkrawlMoMa"
     SkrawlMoMa:

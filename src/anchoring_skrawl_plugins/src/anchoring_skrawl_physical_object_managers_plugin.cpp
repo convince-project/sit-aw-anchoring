@@ -19,9 +19,36 @@ protected:
   /**
    * @brief ...
    */
-  virtual std::string getDisposition() const override
+  virtual std::vector<std::string> getDispositions() const override
   {
-    return("placeability");
+    return {
+      "placeability",
+      "support"
+    };
+  }
+};
+
+class SurfaceManager : public PhysicalObjectManager
+{
+
+protected:
+
+  /**
+   * @brief ...
+   */
+  virtual std::string getType() const override
+  {
+    return("surface");
+  }
+
+  /**
+   * @brief ...
+   */
+  virtual std::vector<std::string> getDispositions() const override
+  {
+    return {
+      "support"
+    };
   }
 };
 
@@ -41,9 +68,11 @@ protected:
   /**
    * @brief ...
    */
-  virtual std::string getDisposition() const override
+  virtual std::vector<std::string> getDispositions() const override
   {
-    return("support");
+    return{
+      "support"
+    };
   }
 };
 
@@ -63,9 +92,11 @@ protected:
   /**
    * @brief ...
    */
-  virtual std::string getDisposition() const override
+  virtual std::vector<std::string> getDispositions() const override
   {
-    return("storage");
+    return{
+      "storage"
+    };
   }
 };
 
@@ -85,9 +116,11 @@ protected:
   /**
    * @brief ...
    */
-  virtual std::string getDisposition() const override
+  virtual std::vector<std::string> getDispositions() const override
   {
-    return("placeability");
+    return{
+      "placeability"
+    };
   }
 };
 
@@ -107,9 +140,11 @@ protected:
   /**
    * @brief ...
    */
-  virtual std::string getDisposition() const override
+  virtual std::vector<std::string> getDispositions() const override
   {
-    return("placeability");
+    return{
+      "placeability"
+    };
   }
 };
 
@@ -129,9 +164,11 @@ protected:
   /**
    * @brief ...
    */
-  virtual std::string getDisposition() const override
+  virtual std::vector<std::string> getDispositions() const override
   {
-    return("placeability");
+    return{
+      "placeability"
+    };
   }
 };
 
@@ -140,6 +177,8 @@ protected:
 #include <pluginlib/class_list_macros.hpp>
 
 PLUGINLIB_EXPORT_CLASS(anchoring_skrawl_plugins::BlockManager, anchoring_core::AnchoringManager)
+
+PLUGINLIB_EXPORT_CLASS(anchoring_skrawl_plugins::SurfaceManager, anchoring_core::AnchoringManager)
 
 PLUGINLIB_EXPORT_CLASS(anchoring_skrawl_plugins::TableManager, anchoring_core::AnchoringManager)
 
