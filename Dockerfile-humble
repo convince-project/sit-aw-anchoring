@@ -42,6 +42,11 @@ RUN mkdir -p /home/"$USERNAME"/sit-aw-anchoring/colcon_ws
 COPY ./src /home/"$USERNAME"/sit-aw-anchoring/colcon_ws/src
 WORKDIR /home/"$USERNAME"/sit-aw-anchoring/colcon_ws
 
+# Add skrawl
+RUN git clone https://github.com/convince-project/sit-aw-skrawl.git /tmp/sit-aw-skrawl-temp
+RUN mv /tmp/sit-aw-skrawl-temp/schemas /home/"$USERNAME"/sit-aw-anchoring/colcon_ws/src/anchoring_skrawl_plugins/skrawl/ && \
+    rm -rf /tmp/sit-aw-skrawl-temp
+
 #Install missing dependencies (most of them should be tackeld above to optimise build time)
 RUN source /opt/ros/humble/setup.bash &&\
 	apt update &&\

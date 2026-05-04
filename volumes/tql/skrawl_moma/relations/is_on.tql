@@ -1,0 +1,5 @@
+match
+  (location: $n, located: $d) isa is_on;
+  $n has name $nn;
+  $d has name $dn;
+get;

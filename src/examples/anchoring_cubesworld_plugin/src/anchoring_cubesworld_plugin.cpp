@@ -104,7 +104,7 @@ public:
 
     for (auto &m : mappings_)
     {
-      double val = extractValue(dt_data, m.jsonKey);
+      double val = extractValue(dt_data, m.jsonKey).get<double>();
       std::string q = "match $c isa Cube, has id \"" + inst_id + "\", has " + m.attrName + " $c_a; "
                       "delete $c has $c_a; "
                       "insert $c has " + m.attrName + " " + std::to_string(val) + ";";
@@ -113,7 +113,7 @@ public:
 
     for (auto &m : mappings_pose_)
     {
-      double val = extractValue(dt_data, m.jsonKey);
+      double val = extractValue(dt_data, m.jsonKey).get<double>();
       std::string q = "match $c isa Cube, has id \"" + inst_id + "\"; "
                       "(cube: $c, grasp_pose: $p) isa has_grasp_pose; "
                       "$p has " + m.attrName + " $p_a; "
@@ -218,7 +218,7 @@ public:
 
     for (auto &m : mappings_)
     {
-      double val = extractValue(dt_data, m.jsonKey);
+      double val = extractValue(dt_data, m.jsonKey).get<double>();
       std::string q = "match $a isa Agent, has id \"" + inst_id + "\", has " + m.attrName + " $a_a; "
                       "delete $a has $a_a; "
                       "insert $a has " + m.attrName + " " + std::to_string(val) + ";";

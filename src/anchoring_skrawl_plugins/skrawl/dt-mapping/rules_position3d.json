@@ -1,0 +1,15 @@
+[
+    {
+      "json-path": "position[0]",
+      "target-attr": "lin_x"
+    },
+    {
+      "json-path": "position[1]",
+      "target-attr": "lin_y"
+    },
+    {
+      "json-path": "position[2]",
+      "target-attr": "lin_z"
+    }
+]
+  

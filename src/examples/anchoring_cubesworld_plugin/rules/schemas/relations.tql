@@ -1,3 +1,5 @@
+define
+
         # Relations
         # Configured with Digital Twin
         has_id sub relation,
