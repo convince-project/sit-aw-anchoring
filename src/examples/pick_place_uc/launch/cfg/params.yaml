@@ -1,7 +1,9 @@
 anchoring_process:
   ros__parameters:
     dt:
-      service_name: "/pybullet_dt/get_data"
+      service_names:
+        - "/pybullet_dt/get_data"
+        - "/fail_place_executor_mockup/get_info"
       timeout: 2    # seconds
 #    SkrawlMoMa:
 #      database_name: "test1234"

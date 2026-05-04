@@ -98,21 +98,7 @@ def get_data(client_id):
         })
         letter_id += 1 
 
-        # mockup failure of place action
-        data.append({
-                "dt_id": "place44",
-                "place_def": {
-                    "param": {
-                        "who"  : "gripper",
-                        "what" : "A",
-                        "where": "C"
-                    },
-                    "result": "failure"
-                }
-        })
-
     return json.dumps(data)
-
 
 class PyBulletDT(Node):
 

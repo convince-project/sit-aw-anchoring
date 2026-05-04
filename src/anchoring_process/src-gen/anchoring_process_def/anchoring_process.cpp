@@ -98,7 +98,7 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn
         );
       if (!client->wait_for_service(
           std::chrono::duration<int>(dt_timeout_))) {
-        RCLCPP_ERROR(get_logger(), "DT service not available after timeout");
+        RCLCPP_ERROR(get_logger(), "DT service %s not available after timeout", service_name.c_str());
         return rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn::FAILURE;
       }
       dt_clients_.push_back(client);
