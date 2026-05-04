@@ -59,7 +59,7 @@ anchoring_process::anchoring_process(rclcpp::NodeOptions /*in*/options) :
   dt_client_cb_group_ = create_callback_group(
       rclcpp::CallbackGroupType::MutuallyExclusive);
 
-  declare_parameter("dt.service_name", "/dt/get_data");
+  declare_parameter<std::vector<std::string>>("dt.service_names", std::vector<std::string>{});
   declare_parameter("dt.timeout", 2);
 }
 
@@ -70,13 +70,14 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn
     RCLCPP_INFO(get_logger(), "Configuring (base)");
 
     // dt-related parameters
-    dt_service_name_ = this->get_parameter("dt.service_name").as_string();
-    if (dt_service_name_.empty()) {
-      RCLCPP_ERROR(get_logger(), "Parameter 'dt.service_name' is empty!");
-      return CallbackReturn::FAILURE;
+    dt_service_names_ = get_parameter("dt.service_names").as_string_array();
+    if (dt_service_names_.empty()) {
+      RCLCPP_ERROR(get_logger(), "dt.service_names is empty!");
+      return rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn::FAILURE;
     }
+    dt_clients_.clear(); // Clear previous clients (important for lifecycle reconfigure)
 
-    dt_timeout_ = this->get_parameter("dt.timeout").as_int();
+    dt_timeout_ = get_parameter("dt.timeout").as_int();
     if (dt_timeout_ <= 0) {
       RCLCPP_WARN(
         get_logger(),
@@ -84,16 +85,23 @@ rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn
       dt_timeout_ = 2;
     }    
 
-    // Create dt client
-    dt_client_ptr_ = this->create_client<std_srvs::srv::Trigger>(
-      dt_service_name_,
-      qosDefault(),
-      dt_client_cb_group_
-    );
-    if (!dt_client_ptr_->wait_for_service(
+    // Create dt clients (one client per service)
+    for (const auto & service_name : dt_service_names_) {
+      if (service_name.empty()) {
+        RCLCPP_ERROR(get_logger(), "Empty service name found!");
+        return rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn::FAILURE;
+      }
+      auto client = this->create_client<std_srvs::srv::Trigger>(
+          service_name,
+          qosDefault(),
+          dt_client_cb_group_
+        );
+      if (!client->wait_for_service(
           std::chrono::duration<int>(dt_timeout_))) {
-      RCLCPP_ERROR(get_logger(), "DT service not available after timeout");
-      return rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn::FAILURE;
+        RCLCPP_ERROR(get_logger(), "DT service %s not available after timeout", service_name.c_str());
+        return rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn::FAILURE;
+      }
+      dt_clients_.push_back(client);
     }
 
     // set_ontology action server

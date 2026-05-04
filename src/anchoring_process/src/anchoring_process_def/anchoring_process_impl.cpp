@@ -392,44 +392,55 @@ void anchoring_process_impl::update_state_accepted(
     // Process each DT_Config entry (Step 4)
     //
 
-    // do a synch data request to the DT
-    auto request = std::make_shared<std_srvs::srv::Trigger::Request>();
-    auto response_future = dt_client_ptr_->async_send_request(request);
-    if (response_future.wait_for(std::chrono::seconds(dt_timeout_)) != std::future_status::ready) {
-      RCLCPP_ERROR(this->get_logger(),
-        "Digital twin service server did not respond within timeout of %ld seconds. Request is discarded.",
-         std::chrono::seconds(dt_timeout_).count());
-      dt_client_ptr_->remove_pending_request(response_future);
-      goal_handle->abort(result);
-      return;
-    }
-    // parse the data
-    json all_dt_data = json::parse(response_future.get()->message);
-    for (auto &c : configs)
-    {
-      try
-      {
-        // Fetch the DT JSON for the element c.dtId
-        json dt_data = DTSimulator::fetchDTData(c.dtId, all_dt_data);
-        // entity-specific queries
-        std::vector<std::string> queries;
-        std::vector<std::string> cls_queries = managers_[c.cls]->generateUpdateStateQueries(c.parentInstanceId, dt_data);
-        queries.reserve(queries.size() + cls_queries.size());
-        queries.insert(queries.end(), cls_queries.begin(), cls_queries.end());
-
-        // - write
-        TypeDBClient::update_data(queries, driver_, dbname);
-
-        RCLCPP_INFO(this->get_logger(), "[update_state] Anchored data for %s.", c.parentInstanceId.c_str());
-      }
-      catch (const std::exception &e)
-      {
-        // terminate action (failure!)
-        result->result.message = std::string(e.what());
-        RCLCPP_FATAL(this->get_logger(), "[update_state] Unable to update data in the database (dt-id=%s) : %s", c.dtId.c_str(), e.what());
+    // do a synch data request to the DTs
+    json all_dt_data = json::array();
+    for (auto & client : dt_clients_) {
+      auto request = std::make_shared<std_srvs::srv::Trigger::Request>();
+      auto response_future = client->async_send_request(request);
+      if (response_future.wait_for(std::chrono::seconds(dt_timeout_)) != std::future_status::ready) {
+        RCLCPP_ERROR(this->get_logger(),
+          "Digital twin service server did not respond within timeout of %ld seconds. Request is discarded.",
+           std::chrono::seconds(dt_timeout_).count());
+        client->remove_pending_request(response_future);
         goal_handle->abort(result);
         return;
       }
+      // parse the data
+      json jtmp = json::parse(response_future.get()->message);
+      if (!jtmp.is_array()) {
+            throw std::runtime_error("JSON inputs must be arrays");
+      }
+      all_dt_data.insert(all_dt_data.end(), jtmp.begin(), jtmp.end());
+      //all_dt_data.push_back(jtmp);
+    }
+
+    for (auto &c : configs)
+    {
+        try
+        {
+          // Fetch the DT JSON for the element c.dtId
+          json dt_data = DTSimulator::fetchDTData(c.dtId, all_dt_data);
+          // entity-specific queries
+          std::vector<std::string> queries;
+          std::vector<std::string> cls_queries = managers_[c.cls]->generateUpdateStateQueries(c.parentInstanceId, dt_data);
+          if (!cls_queries.empty()) {
+            queries.reserve(queries.size() + cls_queries.size());
+            queries.insert(queries.end(), cls_queries.begin(), cls_queries.end());
+
+            // - write
+            TypeDBClient::update_data(queries, driver_, dbname);
+
+            RCLCPP_INFO(this->get_logger(), "[update_state] Anchored data for %s.", c.parentInstanceId.c_str());
+          }
+        }
+        catch (const std::exception &e)
+        {
+          // terminate action (failure!)
+          result->result.message = std::string(e.what());
+          RCLCPP_FATAL(this->get_logger(), "[update_state] Unable to update data in the database (dt-id=%s) : %s", c.dtId.c_str(), e.what());
+          goal_handle->abort(result);
+          return;
+        }
     }
 
     // terminate action (success!)

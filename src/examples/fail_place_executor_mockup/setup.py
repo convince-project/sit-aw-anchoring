@@ -3,7 +3,7 @@ from glob import glob
 
 from setuptools import find_packages, setup
 
-package_name = 'pybullet_dt'
+package_name = 'fail_place_executor_mockup'
 
 setup(
     name=package_name,
@@ -13,15 +13,11 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        # Include launch files
-        (os.path.join('share', package_name, 'launch'), glob('launch/*.launch.py')),
-        # Include cfg
-        (os.path.join('share', package_name, 'launch', 'cfg'), glob('launch/cfg/*.yaml')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='jb282126',
-    maintainer_email='jeremie.bodin@cea.fr',
+    maintainer='Matteo Morelli',
+    maintainer_email='matteo.morelli@cea.fr',
     description='TODO: Package description',
     license='TODO: License declaration',
     extras_require={
@@ -31,7 +27,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'pybullet_dt = pybullet_dt.pybullet_dt:main',
+            'fail_place_executor_mockup = fail_place_executor_mockup.fail_place_executor_mockup:main',
         ],
     },
 )
