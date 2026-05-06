@@ -1,7 +1,7 @@
-# version: 0.3.0
-FROM ros:jazzy-ros-base
+# version: 0.4.0
+FROM ros:humble-ros-base
 
-ENV ROS_DISTRO=jazzy
+ENV ROS_DISTRO=humble
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -16,14 +16,14 @@ RUN addgroup "$USERNAME" \
  && echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 RUN apt update &&\
-	apt install -y --no-install-recommends wget git gedit python3-pip \
-	  nlohmann-json3-dev ros-jazzy-rmw-cyclonedds-cpp
+	apt install -y --no-install-recommends wget gedit python3-pip \
+	  nlohmann-json3-dev ros-humble-rmw-cyclonedds-cpp
 
 ENV XDG_RUNTIME_DIR=/tmp/runtime-root
 RUN mkdir /usr/share/desktop-directories
 
-RUN python3 -m pip install --break-system-packages --upgrade pip;	\
-    pip3 install --break-system-packages pybullet
+RUN python3 -m pip install --upgrade pip;	\
+    pip3 install pybullet
 
 RUN curl -1sLf \
   'https://repo.typedb.com/public/public-release/setup.deb.sh' \
@@ -39,7 +39,7 @@ RUN apt update &&\
 RUN ln -s /opt/typedb-studio/bin/TypeDB\ Studio /opt/typedb-studio/bin/typedb-studio
 
 RUN mkdir -p /home/"$USERNAME"/sit-aw-anchoring/colcon_ws
-COPY ./src /home/"$USERNAME"/sit-aw-anchoring/colcon_ws/src
+COPY ../src /home/"$USERNAME"/sit-aw-anchoring/colcon_ws/src
 WORKDIR /home/"$USERNAME"/sit-aw-anchoring/colcon_ws
 
 # Add skrawl
@@ -48,27 +48,27 @@ RUN mv /tmp/sit-aw-skrawl-temp/schemas /home/"$USERNAME"/sit-aw-anchoring/colcon
     rm -rf /tmp/sit-aw-skrawl-temp
 
 #Install missing dependencies (most of them should be tackeld above to optimise build time)
-RUN source /opt/ros/jazzy/setup.bash &&\
+RUN source /opt/ros/humble/setup.bash &&\
 	apt update &&\
 	rosdep fix-permissions &&\
 	rosdep update &&\
 	rosdep install --from-paths src --ignore-src -r -y
 
 #Build the components (separate step to cache the rosdep installs)
-RUN source /opt/ros/jazzy/setup.bash &&\
+RUN source /opt/ros/humble/setup.bash &&\
 	colcon build --symlink-install
 
 #Set the .bashrc
-COPY --chown="$USERNAME":"$USERNAME" ./bashrc /home/"$USERNAME"/.bashrc
+COPY --chown="$USERNAME":"$USERNAME" ./docker/bashrc /home/"$USERNAME"/.bashrc
 
 #Set the typedb-studio connection
 #For the root user (when connecting to the docker through exec)
-COPY --chown="$USERNAME":"$USERNAME" ./typedb-studio.properties /root/.typedb-studio/properties/typedb-studio.properties
+COPY --chown="$USERNAME":"$USERNAME" ./docker/typedb-studio.properties /root/.typedb-studio/properties/typedb-studio.properties
 #For the user created when running the entrypoint
-COPY --chown="$USERNAME":"$USERNAME" ./typedb-studio.properties /home/user/.typedb-studio/properties/typedb-studio.properties
+COPY --chown="$USERNAME":"$USERNAME" ./docker/typedb-studio.properties /home/user/.typedb-studio/properties/typedb-studio.properties
 
 #Set the entrypoint
-COPY ./entrypoint.sh /entrypoint.sh
+COPY ./docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 

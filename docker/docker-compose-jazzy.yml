@@ -1,0 +1,7 @@
+services:
+  sit-aw-anchoring:
+    build:
+      context: .
+      dockerfile: Dockerfile-jazzy
+    image: ghcr.io/convince-project/sit-aw-anchoring:0.4.0-jazzy # sit-aw-anchoring:0.4.0-jazzy
+    container_name: sit_aw_anchoring_040_jazzy_ctr
