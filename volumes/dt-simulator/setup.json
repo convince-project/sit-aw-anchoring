@@ -7,7 +7,7 @@
       },
       "DT_config": [
         {
-          "DigitalTwin": "XDE",
+          "DigitalTwin": "pybullet",
           "id_DT": "A"
         }
       ]
@@ -20,7 +20,7 @@
       },
       "DT_config": [
         {
-          "DigitalTwin": "XDE",
+          "DigitalTwin": "pybullet",
           "id_DT": "B"
         }
       ]
@@ -33,7 +33,7 @@
       },
       "DT_config": [
         {
-          "DigitalTwin": "XDE",
+          "DigitalTwin": "pybullet",
           "id_DT": "C"
         }
       ]
@@ -46,7 +46,7 @@
       },
       "DT_config": [
         {
-          "DigitalTwin": "XDE",
+          "DigitalTwin": "pybullet",
           "id_DT": "gripper"
         }
       ]

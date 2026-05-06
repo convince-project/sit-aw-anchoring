@@ -3,8 +3,6 @@
 import pybullet as p
 import pybullet_data
 import time
-# import json
-# import update_json as up
 
 #
 p.connect(p.GUI_SERVER)
@@ -13,68 +11,92 @@ p.setAdditionalSearchPath(pybullet_data.getDataPath())
 #
 p.setGravity(0, 0, -9.8)
 
-p.loadURDF("plane.urdf")
+# --- Load plane ---
+plane_id = p.loadURDF("plane.urdf")
 
-panda = p.loadURDF("franka_panda/panda.urdf", [-0.75, 0, 0],useFixedBase=True)
+# --- Load Franka Panda ---
+robot_id = p.loadURDF("franka_panda/panda.urdf", useFixedBase=True)
 
-box_size = [0.2, 0.2, 0.2]
-base_position = [0, 0, box_size[2] / 2]
+# Reset robot to a neutral pose
+for i in range(7):
+    p.resetJointState(robot_id, i, targetValue=0.0)
 
-#
-colors = [[1, 0, 0, 1], [0, 1, 0, 1], [0, 0, 1, 1]]  # red green blue
+# Open gripper
+p.resetJointState(robot_id, 9, 0.04)
+p.resetJointState(robot_id, 10, 0.04)
 
-#
-# box_ids = []
+# --- Cube parameters ---
+cube_size = 0.12
+half_extents = [cube_size/2]*3
 
-#
-# for i in range(3):
-#     box_id = p.createCollisionShape(p.GEOM_BOX, halfExtents=[s / 2 for s in box_size])
-#     visual_id = p.createVisualShape(p.GEOM_BOX, halfExtents=[s / 2 for s in box_size], rgbaColor=colors[i])
-#     box = p.createMultiBody(baseMass=1,
-#                             baseCollisionShapeIndex=box_id,
-#                             baseVisualShapeIndex=visual_id,
-#                             basePosition=[base_position[0], base_position[1], base_position[2] + i * box_size[2]])
-#     box_ids.append(box)
+collision_shape = p.createCollisionShape(p.GEOM_BOX, halfExtents=half_extents)
 
-# Create marker
-# marker_vis = p.createVisualShape(p.GEOM_SPHERE,
-#                                  radius=0.01,
-#                                  rgbaColor=[1,0,0,1])
+def create_cube(position, color):
+    visual_shape = p.createVisualShape(
+        p.GEOM_BOX,
+        halfExtents=half_extents,
+        rgbaColor=color
+    )
+    return p.createMultiBody(
+        baseMass=0.1,
+        baseCollisionShapeIndex=collision_shape,
+        baseVisualShapeIndex=visual_shape,
+        basePosition=position
+    )
 
-for i in range(3):
-    box_id = p.createCollisionShape(p.GEOM_BOX, halfExtents=[s / 2 for s in box_size])
-    visual_id = p.createVisualShape(p.GEOM_BOX, halfExtents=[s / 2 for s in box_size], rgbaColor=colors[i])
-    # z_box = base_position[2] + i * box_size[2]
-    p.createMultiBody(baseMass=1,
-                      baseCollisionShapeIndex=box_id,
-                      baseVisualShapeIndex=visual_id,
-                      basePosition=[base_position[0], base_position[1], base_position[2] + i * box_size[2]])
-    # box_ids.append(box)
+# --- Create stacked cubes (red bottom, green top) ---
+red_cube_pos = [0.6, 0.1, cube_size/2]
+green_cube_pos = [0.6, 0.1, cube_size * 1.5]
 
-    # Attach a marker for this box (Easy to get position of 'pose' after)
-    # Create a marker
-    # mid = p.createMultiBody(baseMass=0,
-    #                         baseCollisionShapeIndex=-1,     # no collision
-    #                         baseVisualShapeIndex=marker_vis,
-    #                         basePosition=[base_position[0],base_position[1],z_box + box_size[2]/2])           
+red_cube = create_cube(red_cube_pos, [1, 0, 0, 1])
+green_cube = create_cube(green_cube_pos, [0, 1, 0, 1])
 
-    # Attach the marker
-    # p.createConstraint(parentBodyUniqueId=bid, parentLinkIndex=-1,
-    #                    childBodyUniqueId=mid, childLinkIndex=-1,
-    #                    jointType=p.JOINT_FIXED, jointAxis=[0,0,0],
-    #                    parentFramePosition=[0, 0, box_size[2]/2],  # center of top face
-    #                    childFramePosition=[0, 0, 0])
+# --- Create blue cube near gripper ---
+blue_cube_pos = [0.4, 0.0, 0.2]
+blue_cube = create_cube(blue_cube_pos, [0, 0, 1, 1])
 
+# --- Attach blue cube to gripper (fake grasp using constraint) ---
+end_effector_index = 11  # Panda hand link
 
-# last_call_time = time.time()
+constraint_id = p.createConstraint(
+    parentBodyUniqueId=robot_id,
+    parentLinkIndex=end_effector_index,
+    childBodyUniqueId=blue_cube,
+    childLinkIndex=-1,
+    jointType=p.JOINT_FIXED,
+    jointAxis=[0, 0, 0],
+    parentFramePosition=[0, 0, 0.05],
+    childFramePosition=[0, 0, 0]
+)
 
+# Target position: above green cube
+target_pos = [
+    green_cube_pos[0],
+    green_cube_pos[1],
+    green_cube_pos[2] + 4*cube_size  # hover 4 cube height above
+]
+
+# Orientation: gripper pointing down
+target_orn = p.getQuaternionFromEuler([3.1416, 0, 0])
+
+# Compute IK
+joint_positions = p.calculateInverseKinematics(
+    robot_id,
+    end_effector_index,
+    target_pos,
+    target_orn
+)
+
+# Apply IK solution (first 7 joints are arm joints)
+for i in range(7):
+    p.resetJointState(robot_id, i, joint_positions[i])
+
+# Limit drift effects
+p.setRealTimeSimulation(0)
+for j in range(p.getNumJoints(robot_id)):
+    p.changeDynamics(robot_id, j, mass=0)
+    
 while True:
     p.stepSimulation()
     time.sleep(1. / 240.)
 
-    # if time.time() - last_call_time >= 5:
-        # up.save_to_json(box_ids, p, "box_positions.json")
-        # last_call_time = time.time()
-
-
-# p.disconnect()
