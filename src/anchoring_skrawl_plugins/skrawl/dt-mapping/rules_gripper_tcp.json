@@ -1,0 +1,15 @@
+[
+    { 
+      "json-path": "gripper.center[0]", 
+      "target-attr": "lin_x" 
+    },
+    { 
+      "json-path": "gripper.center[1]", 
+      "target-attr": "lin_y" 
+    },
+    { 
+      "json-path": "gripper.center[2]", 
+      "target-attr": "lin_z" 
+    }
+  ]
+  

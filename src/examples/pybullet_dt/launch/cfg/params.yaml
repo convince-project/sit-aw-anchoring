@@ -1,0 +1,5 @@
+fail_place_executor_mockup:
+  ros__parameters:
+    who: "gripper"
+    what: "A"
+    where: "C"

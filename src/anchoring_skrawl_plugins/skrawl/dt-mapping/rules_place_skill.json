@@ -1,0 +1,19 @@
+[
+    { 
+      "json-path": "place_def.param.who", 
+      "target-attr": "who_id" 
+    },
+    { 
+      "json-path": "place_def.param.what", 
+      "target-attr": "what_id" 
+    },
+    { 
+      "json-path": "place_def.param.where", 
+      "target-attr": "where_id" 
+    },
+    { 
+      "json-path": "place_def.result", 
+      "target-attr": "exec_result" 
+    }
+  ]
+  

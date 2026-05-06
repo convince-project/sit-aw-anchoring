@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package format="3">
+	<name>anchoring_process</name>
+	<version>0.1.0</version>
+  <description>Implementation of the anchoring process node. It is the node to deploy.</description>
+  <author email="Yechao.SUN@cea.fr">Yechao SUN</author>
+  <author email="raphael.lallement@cea.fr">Raphaël LALLEMENT</author>
+  <author email="matteo.morelli@cea.fr">Matteo MORELLI</author>
+  <maintainer email="matteo.morelli@cea.fr">Matteo MORELLI</maintainer>
+  <license>CeCILL-B</license>
+
+	<buildtool_depend>ament_cmake</buildtool_depend>
+
+	<depend>nlohmann_json</depend>
+	<depend>rclcpp</depend>
+	<depend>rclcpp_lifecycle</depend>
+	<depend>rclcpp_action</depend>
+	<depend>std_srvs</depend>
+	<depend>anchoring_process_interfaces</depend>
+	<depend>anchoring_core</depend>
+	<depend>pluginlib</depend>
+
+	<export>
+		<build_type>ament_cmake</build_type>
+	</export>
+</package>

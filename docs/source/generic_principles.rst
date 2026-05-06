@@ -9,13 +9,13 @@ Semantic anchoring plays a crucial role, as it can infer a set of true/false sym
 
 The inference mechanism at the core of semantic anchoring is enabled by a knowledge base constituted by an ontology and its rules, as shown in the figure below. The use of ontologies is key, as ontologies enable the access to a large body of knowledge representing standardized conceptualizations of multiple domains related to robot autonomy.
 
-.. image:: graphics/principles-local_schema.png
+.. image:: graphics/principles/local_schema.png
     :width: 800
     :alt: Focus on semantic anchoring and its interactions with other modules.
 
 The next figure shows how the different processes in the situation awareness pipeline represent the knowledge available at their own level. The perception process can detect the class and position of the elements. The digital twin associates and maintains over time, an ID for the objects and stores their 3D models en properties. The anchoring process adds semantic meaning to the objects and allows to build predicates.
 
-.. image:: graphics/principles-pipeline_concrete_example.png
+.. image:: graphics/principles/pipeline_concrete_example.png
     :width: 800
     :alt: Illustrative example of the knowledge models along the situation awareness pipeline.
 

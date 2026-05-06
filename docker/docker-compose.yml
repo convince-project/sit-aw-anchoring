@@ -1,0 +1,31 @@
+services:
+
+  sit-aw-anchoring:
+
+    init: true
+    privileged: true
+
+    network_mode: host
+    ipc: host
+
+    stdin_open: true
+    tty: true
+
+    environment:
+      ROS_DOMAIN_ID: 0
+      RMW_IMPLEMENTATION: rmw_cyclonedds_cpp
+      ROS_AUTOMATIC_DISCOVERY_RANGE: LOCALHOST
+      DISPLAY: ${DISPLAY}
+      QT_X11_NO_MITSHM: 1
+      UID: ${UID}
+      GID: ${GID}
+      XDG_RUNTIME_DIR: /home/user/xdg-runtime
+      NO_AT_BRIDGE: 1
+
+    volumes:
+      - ./bash_history:/home/user/.bash_history:rw
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /dev/dri:/dev/dri:rw
+      - ../volumes/tql:/tmp/tql
+      - ../volumes/dt-simulator:/tmp/dt
+

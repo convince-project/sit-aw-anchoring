@@ -1,0 +1,7 @@
+[
+    { 
+      "json-path": "gripper.remaining_reach", 
+      "target-attr": "remaining_reach" 
+    }
+  ]
+  
