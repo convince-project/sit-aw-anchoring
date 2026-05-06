@@ -26,6 +26,6 @@ services:
       - ./bash_history:/home/user/.bash_history:rw
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - /dev/dri:/dev/dri:rw
-      - ./volumes/tql:/tmp/tql
-      - ./volumes/dt-simulator:/tmp/dt
+      - ../volumes/tql:/tmp/tql
+      - ../volumes/dt-simulator:/tmp/dt
 

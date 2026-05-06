@@ -1,8 +1,0 @@
-include: 
-  - path: ./docker-compose-jazzy.yml
-
-services:
-  sit-aw-anchoring:
-    command: bash -c "
-        source /home/user/sit-aw-anchoring/colcon_ws/install/setup.sh && ros2 launch start_demo start_demo_launch.py
-      "
